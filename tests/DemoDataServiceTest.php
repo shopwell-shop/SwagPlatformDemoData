@@ -36,7 +36,7 @@ class DemoDataServiceTest extends TestCase
     private const PROPERTY_GROUP_COUNT = 7;
     private const PROPERTY_OPTION_COUNT = 27;
     private const RULE_COUNT = 4;
-    private const VARIANT_COUNT = 10;
+    private const VARIANT_COUNT = 69;
     private const ORDER_COUNT = 30;
     private const TAG_COUNT = 20;
     private const PRODUCT_STREAM_COUNT = 30;
@@ -81,6 +81,57 @@ class DemoDataServiceTest extends TestCase
         $this->assertEntityCountGreaterThanOrEqual(self::TAG_COUNT, 'tag.repository');
         $this->assertEntityCountGreaterThanOrEqual(self::PRODUCT_STREAM_COUNT, 'product_stream.repository');
         $this->assertEntityCountGreaterThanOrEqual(self::PROMOTION_COUNT, 'promotion.repository');
+    }
+
+    public function testEveryProductHasBetweenOneAndThreeVariants(): void
+    {
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        $connection = $this->getContainer()->get(Connection::class);
+
+        $variantCounts = $connection->fetchAllAssociative('
+            SELECT p.product_number AS `number`, COUNT(c.id) AS `variants`
+            FROM `product` p
+            INNER JOIN `product` c ON c.parent_id = p.id
+            WHERE p.product_number LIKE "SW-DEMO-%"
+            GROUP BY p.id
+        ');
+
+        static::assertCount(self::PRODUCT_COUNT, $variantCounts);
+
+        foreach ($variantCounts as $row) {
+            static::assertGreaterThanOrEqual(
+                1,
+                (int) $row['variants'],
+                'Product ' . $row['number'] . ' should have at least one variant',
+            );
+            static::assertLessThanOrEqual(
+                3,
+                (int) $row['variants'],
+                'Product ' . $row['number'] . ' should have at most three variants',
+            );
+        }
+
+        static::assertSame(
+            self::VARIANT_COUNT,
+            (int) $connection->fetchOne('SELECT COUNT(*) FROM `product` WHERE `product_number` LIKE \'SW-DEMO-%.%\''),
+        );
+    }
+
+    public function testOrdersReferenceSellableVariantsInsteadOfParents(): void
+    {
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        $connection = $this->getContainer()->get(Connection::class);
+
+        // no line item of a demo order points at a configurable parent
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `order_line_item` li
+            INNER JOIN `order` o ON o.id = li.order_id
+            INNER JOIN `product` p ON p.id = li.product_id
+            WHERE o.order_number LIKE "SW-DEMO-ORD-%"
+              AND EXISTS (SELECT 1 FROM `product` child WHERE child.parent_id = p.id)
+        '));
     }
 
     public function testGenerateAssignsTagsToProductsAndCustomers(): void

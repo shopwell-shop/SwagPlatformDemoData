@@ -43,13 +43,6 @@
       ],
       "variants": [
         {
-          "group": "colour",
-          "options": [
-            "bb6befecc1354152ea31879430e45042",
-            "3c39ce826a9811ed3e03b37a871db33f"
-          ]
-        },
-        {
           "group": "size",
           "options": [
             "a79d505447231fdc5e9b19899478f057",
@@ -98,6 +91,16 @@
         "4cdc3fa4dea83da5edbbc4ca888999cd",
         "adc3436ecc216988ee456ecd1cd6e1d6",
         "ca11b1694afcb4157c830882a74ea817"
+      ],
+      "variants": [
+        {
+          "group": "size",
+          "options": [
+            "bf123d949247842d41d6ae81c5aaeb12",
+            "a79d505447231fdc5e9b19899478f057",
+            "4cdc3fa4dea83da5edbbc4ca888999cd"
+          ]
+        }
       ]
     },
     {
@@ -139,6 +142,16 @@
         "d8e59f0c6b16a4000f2fb07118ac146d",
         "12d312143e5ed38dd45afd0a7d6a9881",
         "b9b8bc1742a02d4a0bea3dd5a78bbd86"
+      ],
+      "variants": [
+        {
+          "group": "size",
+          "options": [
+            "a79d505447231fdc5e9b19899478f057",
+            "4cdc3fa4dea83da5edbbc4ca888999cd",
+            "d8e59f0c6b16a4000f2fb07118ac146d"
+          ]
+        }
       ]
     },
     {
@@ -179,6 +192,15 @@
         "4cdc3fa4dea83da5edbbc4ca888999cd",
         "adc3436ecc216988ee456ecd1cd6e1d6",
         "ca11b1694afcb4157c830882a74ea817"
+      ],
+      "variants": [
+        {
+          "group": "size",
+          "options": [
+            "a79d505447231fdc5e9b19899478f057",
+            "4cdc3fa4dea83da5edbbc4ca888999cd"
+          ]
+        }
       ]
     },
     {
@@ -220,6 +242,16 @@
         "d8e59f0c6b16a4000f2fb07118ac146d",
         "adc3436ecc216988ee456ecd1cd6e1d6",
         "b9b8bc1742a02d4a0bea3dd5a78bbd86"
+      ],
+      "variants": [
+        {
+          "group": "size",
+          "options": [
+            "a79d505447231fdc5e9b19899478f057",
+            "4cdc3fa4dea83da5edbbc4ca888999cd",
+            "d8e59f0c6b16a4000f2fb07118ac146d"
+          ]
+        }
       ]
     },
     {
@@ -268,8 +300,7 @@
           "options": [
             "e8819557e3c1bee0b60bbc2771e56dc3",
             "204bd47714572e84a72a4d002889429b",
-            "6bdc2fbd0d9ca7515a3630ff8be5ab8f",
-            "eb550c1def5373bcff351739dd831db8"
+            "6bdc2fbd0d9ca7515a3630ff8be5ab8f"
           ]
         }
       ]
@@ -309,7 +340,18 @@
       "properties": [
         "bb6befecc1354152ea31879430e45042",
         "3c39ce826a9811ed3e03b37a871db33f",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "19ff65bda05bd9921aeb2b02814a2109"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "bb6befecc1354152ea31879430e45042",
+            "3c39ce826a9811ed3e03b37a871db33f",
+            "19ff65bda05bd9921aeb2b02814a2109"
+          ]
+        }
       ]
     },
     {
@@ -348,7 +390,18 @@
         "bb6befecc1354152ea31879430e45042",
         "19ff65bda05bd9921aeb2b02814a2109",
         "8386aeae628c5b2ea43c31e26d9af805",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "3c39ce826a9811ed3e03b37a871db33f"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "bb6befecc1354152ea31879430e45042",
+            "19ff65bda05bd9921aeb2b02814a2109",
+            "3c39ce826a9811ed3e03b37a871db33f"
+          ]
+        }
       ]
     },
     {
@@ -385,7 +438,17 @@
       ],
       "properties": [
         "3c39ce826a9811ed3e03b37a871db33f",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "bb6befecc1354152ea31879430e45042"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "3c39ce826a9811ed3e03b37a871db33f",
+            "bb6befecc1354152ea31879430e45042"
+          ]
+        }
       ]
     },
     {
@@ -422,7 +485,17 @@
       ],
       "properties": [
         "bb6befecc1354152ea31879430e45042",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "3c39ce826a9811ed3e03b37a871db33f"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "bb6befecc1354152ea31879430e45042",
+            "3c39ce826a9811ed3e03b37a871db33f"
+          ]
+        }
       ]
     },
     {
@@ -461,6 +534,15 @@
         "bb6befecc1354152ea31879430e45042",
         "7471f6ec8e85e3f142f50797611172e2",
         "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "bb6befecc1354152ea31879430e45042",
+            "7471f6ec8e85e3f142f50797611172e2"
+          ]
+        }
       ]
     },
     {
@@ -497,7 +579,17 @@
       ],
       "properties": [
         "3c39ce826a9811ed3e03b37a871db33f",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "bb6befecc1354152ea31879430e45042"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "3c39ce826a9811ed3e03b37a871db33f",
+            "bb6befecc1354152ea31879430e45042"
+          ]
+        }
       ]
     },
     {
@@ -535,7 +627,17 @@
       "properties": [
         "3c39ce826a9811ed3e03b37a871db33f",
         "eae040d1d6ba41d4fdf46950bae505f3",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "19ff65bda05bd9921aeb2b02814a2109"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "3c39ce826a9811ed3e03b37a871db33f",
+            "19ff65bda05bd9921aeb2b02814a2109"
+          ]
+        }
       ]
     },
     {
@@ -572,7 +674,17 @@
       ],
       "properties": [
         "c88d3d23f334c60c90ca2c5bdc3f48fe",
-        "ca11b1694afcb4157c830882a74ea817"
+        "ca11b1694afcb4157c830882a74ea817",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -610,7 +722,17 @@
       "properties": [
         "7471f6ec8e85e3f142f50797611172e2",
         "4cd9051f648f6bb347f6dea7588bf385",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "3c39ce826a9811ed3e03b37a871db33f"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "7471f6ec8e85e3f142f50797611172e2",
+            "3c39ce826a9811ed3e03b37a871db33f"
+          ]
+        }
       ]
     },
     {
@@ -647,7 +769,18 @@
       ],
       "properties": [
         "eae040d1d6ba41d4fdf46950bae505f3",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -686,7 +819,19 @@
         "3c39ce826a9811ed3e03b37a871db33f",
         "8386aeae628c5b2ea43c31e26d9af805",
         "e801a5320b9df2595c538f07753fc122",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "dfc884656cc9aedced9dbc89681d3e77",
+        "1f9dfcd67c1d49944b6a93222a6d7380"
+      ],
+      "variants": [
+        {
+          "group": "capacity",
+          "options": [
+            "dfc884656cc9aedced9dbc89681d3e77",
+            "8386aeae628c5b2ea43c31e26d9af805",
+            "1f9dfcd67c1d49944b6a93222a6d7380"
+          ]
+        }
       ]
     },
     {
@@ -723,7 +868,17 @@
       ],
       "properties": [
         "3c39ce826a9811ed3e03b37a871db33f",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "bb6befecc1354152ea31879430e45042"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "3c39ce826a9811ed3e03b37a871db33f",
+            "bb6befecc1354152ea31879430e45042"
+          ]
+        }
       ]
     },
     {
@@ -760,7 +915,17 @@
       ],
       "properties": [
         "bdec98d4cc5b90f8bd65be47c9e21262",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -797,7 +962,17 @@
       ],
       "properties": [
         "c88d3d23f334c60c90ca2c5bdc3f48fe",
-        "ca11b1694afcb4157c830882a74ea817"
+        "ca11b1694afcb4157c830882a74ea817",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -834,7 +1009,17 @@
       ],
       "properties": [
         "bdec98d4cc5b90f8bd65be47c9e21262",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -871,7 +1056,17 @@
       ],
       "properties": [
         "c88d3d23f334c60c90ca2c5bdc3f48fe",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -908,7 +1103,17 @@
       ],
       "properties": [
         "bdec98d4cc5b90f8bd65be47c9e21262",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -945,7 +1150,17 @@
       ],
       "properties": [
         "c88d3d23f334c60c90ca2c5bdc3f48fe",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -981,7 +1196,18 @@
         "2b81b286da52ce884d172fa3cceddfeb"
       ],
       "properties": [
-        "ca11b1694afcb4157c830882a74ea817"
+        "ca11b1694afcb4157c830882a74ea817",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -1018,7 +1244,17 @@
       ],
       "properties": [
         "1ed5566cddafcae086f6c28c579f8210",
-        "ca11b1694afcb4157c830882a74ea817"
+        "ca11b1694afcb4157c830882a74ea817",
+        "bb6befecc1354152ea31879430e45042"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "1ed5566cddafcae086f6c28c579f8210",
+            "bb6befecc1354152ea31879430e45042"
+          ]
+        }
       ]
     },
     {
@@ -1055,7 +1291,17 @@
       ],
       "properties": [
         "c88d3d23f334c60c90ca2c5bdc3f48fe",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -1091,7 +1337,18 @@
         "da7650789f01dee39ba2852ae0177d07"
       ],
       "properties": [
-        "ca11b1694afcb4157c830882a74ea817"
+        "ca11b1694afcb4157c830882a74ea817",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     },
     {
@@ -1128,7 +1385,19 @@
       ],
       "properties": [
         "8386aeae628c5b2ea43c31e26d9af805",
-        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+        "1c8c1303b4421c81a7dd5f4e91e89e8e",
+        "dfc884656cc9aedced9dbc89681d3e77",
+        "1f9dfcd67c1d49944b6a93222a6d7380"
+      ],
+      "variants": [
+        {
+          "group": "capacity",
+          "options": [
+            "dfc884656cc9aedced9dbc89681d3e77",
+            "8386aeae628c5b2ea43c31e26d9af805",
+            "1f9dfcd67c1d49944b6a93222a6d7380"
+          ]
+        }
       ]
     },
     {
@@ -1164,7 +1433,18 @@
         "b35e3a86e881b064cf6a13a06fff070d"
       ],
       "properties": [
-        "ca11b1694afcb4157c830882a74ea817"
+        "ca11b1694afcb4157c830882a74ea817",
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "bdec98d4cc5b90f8bd65be47c9e21262"
+      ],
+      "variants": [
+        {
+          "group": "package",
+          "options": [
+            "c88d3d23f334c60c90ca2c5bdc3f48fe",
+            "bdec98d4cc5b90f8bd65be47c9e21262"
+          ]
+        }
       ]
     }
   ]

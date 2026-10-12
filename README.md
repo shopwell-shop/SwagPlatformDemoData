@@ -12,8 +12,9 @@ Demo content currently shipped:
 
 - **30 products** across the usual Chinese e-commerce categories (apparel, digital, home, food, beauty),
   each with **at least 3 images**, bilingual product names/descriptions (`zh-CN` + `en-GB`)
+- **1 to 3 variants per product** (69 in total, sized/coloured/packaged consistently per category)
 - **30 customers** with realistic names, phone numbers, e-mail addresses and Chinese addresses
-- **30 orders** with line items, delivery and payment state
+- **30 orders** with line items pointing at real variants, delivery and payment state
 - **20 tags** assigned to products and customers
 - **30 dynamic product groups** and **30 promotions**
 - Advanced prices, cross sellings, categories, property groups, cart rules, shipping methods and a

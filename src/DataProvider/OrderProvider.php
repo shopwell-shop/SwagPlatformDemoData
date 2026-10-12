@@ -91,17 +91,21 @@ class OrderProvider extends DemoDataProvider
     public function getPayload(): array
     {
         $customerIds = CustomerProvider::getDemoCustomerIds();
-        $products = ProductProvider::getDemoProducts();
+        // Orders reference the sellable variants, never a configurable parent.
+        $products = ProductProvider::getDemoPurchasableProducts();
         $salesChannelId = $this->getStorefrontSalesChannelId();
         $paymentMethodId = $this->getPaymentMethodId();
         $shippingMethodId = $this->getShippingMethodId();
         $countryId = $this->getCountryIdByIsoCode('CN');
         $taxRate = TaxProvider::TAX_RATE;
         $stateIds = $this->getStateIds();
+        $existingOrderIds = $this->getExistingOrderIds();
 
         $payload = [];
         for ($index = 0; $index < self::ORDER_COUNT; ++$index) {
             $orderId = self::orderId($index);
+            // A re-import has to keep the states of orders that already exist.
+            $isUpdate = isset($existingOrderIds[$orderId]);
             $customer = CustomerProvider::getDemoCustomer($customerIds[$index % \count($customerIds)]);
 
             // one to three items per order, deterministic and distinct
@@ -143,7 +147,7 @@ class OrderProvider extends DemoDataProvider
             $address = $customer['address'];
             $orderAddressId = \md5($orderId . ':address:1');
 
-            $payload[] = [
+            $order = [
                 'id' => $orderId,
                 'orderNumber' => self::ORDER_NUMBER_PREFIX . \str_pad((string) ($index + 1), 4, '0', \STR_PAD_LEFT),
                 'salesChannelId' => $salesChannelId,
@@ -203,6 +207,14 @@ class OrderProvider extends DemoDataProvider
                     'stateId' => $transactionState,
                 ]],
             ];
+
+            if ($isUpdate) {
+                // The write API rejects a state change for an existing entity in
+                // the crud scope, so a re-import keeps the current order states.
+                unset($order['stateId'], $order['deliveries'][0]['stateId'], $order['transactions'][0]['stateId']);
+            }
+
+            $payload[] = $order;
         }
 
         return $payload;
@@ -254,6 +266,21 @@ class OrderProvider extends DemoDataProvider
             ]],
             'taxRules' => [['taxRate' => $taxRate, 'percentage' => 100.0]],
         ];
+    }
+
+    /**
+     * @return array<string, true> indexed by the hex id of every already imported demo order
+     */
+    private function getExistingOrderIds(): array
+    {
+        /** @var list<string> $ids */
+        $ids = $this->connection->fetchFirstColumn('
+            SELECT LOWER(HEX(`id`))
+            FROM `order`
+            WHERE `order_number` LIKE :prefix
+        ', ['prefix' => self::ORDER_NUMBER_PREFIX . '%']);
+
+        return \array_fill_keys($ids, true);
     }
 
     /**

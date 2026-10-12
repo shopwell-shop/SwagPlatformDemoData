@@ -79,6 +79,7 @@ return static function (ContainerConfigurator $container): void {
         ->args([
             service(Connection::class),
             service(ClockInterface::class),
+            service('product.repository'),
         ])
         ->tag('swag.demo_data.data_provider', ['priority' => 400]);
 

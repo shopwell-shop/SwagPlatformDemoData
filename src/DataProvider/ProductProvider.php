@@ -10,10 +10,14 @@ declare(strict_types=1);
 
 namespace Swag\PlatformDemoData\DataProvider;
 
+use Doctrine\DBAL\ArrayParameterType;
 use Doctrine\DBAL\Connection;
 use Psr\Clock\ClockInterface;
 use Shopwell\Core\Content\Product\Aggregate\ProductVisibility\ProductVisibilityDefinition;
+use Shopwell\Core\Content\Product\ProductCollection;
 use Shopwell\Core\Defaults;
+use Shopwell\Core\Framework\Context;
+use Shopwell\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopwell\Core\Framework\Log\Package;
 use Shopwell\Core\Framework\Uuid\Uuid;
 use Swag\PlatformDemoData\Helper\ProductReviewHelper;
@@ -37,10 +41,19 @@ class ProductProvider extends DemoDataProvider
 
     private ClockInterface $clock;
 
-    public function __construct(Connection $connection, ?ClockInterface $clock = null)
+    /**
+     * @var EntityRepository<ProductCollection>
+     */
+    private EntityRepository $productRepository;
+
+    /**
+     * @param EntityRepository<ProductCollection> $productRepository
+     */
+    public function __construct(Connection $connection, ?ClockInterface $clock, EntityRepository $productRepository)
     {
         $this->connection = $connection;
         $this->clock = $clock ?? new NativeClock();
+        $this->productRepository = $productRepository;
         $this->translationHelper = new TranslationHelper($connection);
         $this->productReviewHelper = new ProductReviewHelper();
     }
@@ -93,6 +106,94 @@ class ProductProvider extends DemoDataProvider
         }
 
         return $payload;
+    }
+
+    /**
+     * Every sellable demo product: the products without variants themselves and
+     * the single variants of the products that are configurable. Orders have to
+     * point at those, never at a configurable parent.
+     *
+     * @return list<array{id: string, productNumber: string, name: array<string, string>, grossPrice: float, shippingFree: bool}>
+     */
+    public static function getDemoPurchasableProducts(): array
+    {
+        $products = [];
+        foreach (self::getDemoProducts() as $product) {
+            $variants = $product['variants'] ?? null;
+
+            if (!\is_array($variants) || $variants === []) {
+                $products[] = [
+                    'id' => (string) $product['id'],
+                    'productNumber' => (string) $product['productNumber'],
+                    'name' => $product['name'],
+                    'grossPrice' => (float) $product['grossPrice'],
+                    'shippingFree' => (bool) $product['shippingFree'],
+                ];
+
+                continue;
+            }
+
+            for ($number = 1; $number <= \count(self::combinations($variants)); ++$number) {
+                $products[] = [
+                    'id' => self::variantId((string) $product['id'], $number),
+                    'productNumber' => self::variantNumber((string) $product['productNumber'], $number),
+                    'name' => $product['name'],
+                    'grossPrice' => (float) $product['grossPrice'],
+                    'shippingFree' => (bool) $product['shippingFree'],
+                ];
+            }
+        }
+
+        return $products;
+    }
+
+    /**
+     * @return list<string> the product numbers of every shipped demo variant
+     */
+    public static function getDemoVariantProductNumbers(): array
+    {
+        $numbers = [];
+        foreach (self::getDemoProducts() as $product) {
+            $variants = $product['variants'] ?? null;
+            if (!\is_array($variants) || $variants === []) {
+                continue;
+            }
+
+            for ($number = 1; $number <= \count(self::combinations($variants)); ++$number) {
+                $numbers[] = self::variantNumber((string) $product['productNumber'], $number);
+            }
+        }
+
+        return $numbers;
+    }
+
+    public static function variantId(string $productId, int $number): string
+    {
+        return \md5($productId . ':variant:' . $number);
+    }
+
+    public static function variantNumber(string $productNumber, int $number): string
+    {
+        return $productNumber . '.' . $number;
+    }
+
+    /**
+     * The configurator setting of a product and option pair.
+     */
+    public static function configuratorSettingId(string $productId, string $optionId): string
+    {
+        return \md5($productId . ':configurator:' . $optionId);
+    }
+
+    /**
+     * Re-activating a newer version of the demo data must not leave anything
+     * behind: the sync upsert only touches the ids of the current payload, so
+     * variants of an earlier definition are dropped here.
+     */
+    public function finalize(Context $context): void
+    {
+        $this->deleteObsoleteVariants($context);
+        $this->deleteObsoleteConfiguratorSettings();
     }
 
     /**
@@ -238,6 +339,65 @@ class ProductProvider extends DemoDataProvider
         return $entry;
     }
 
+    private function deleteObsoleteVariants(Context $context): void
+    {
+        $expected = \array_flip(self::getDemoVariantProductNumbers());
+
+        /** @var list<array{id: string, number: string}> $rows */
+        $rows = $this->connection->fetchAllAssociative('
+            SELECT LOWER(HEX(`id`)) AS `id`, `product_number` AS `number`
+            FROM `product`
+            WHERE `product_number` LIKE :pattern
+        ', ['pattern' => 'SW-DEMO-%.%']);
+
+        $obsolete = [];
+        foreach ($rows as $row) {
+            if (!isset($expected[$row['number']])) {
+                $obsolete[] = ['id' => $row['id']];
+            }
+        }
+
+        if ($obsolete === []) {
+            return;
+        }
+
+        $this->productRepository->delete($obsolete, $context);
+    }
+
+    private function deleteObsoleteConfiguratorSettings(): void
+    {
+        $expected = [];
+        foreach (self::getDemoProducts() as $product) {
+            /** @var list<array{group: string, options: list<string>}> $variants */
+            $variants = $product['variants'] ?? [];
+            foreach ($variants as $variant) {
+                foreach ($variant['options'] as $optionId) {
+                    $expected[] = self::configuratorSettingId((string) $product['id'], $optionId);
+                }
+            }
+        }
+
+        /** @var list<string> $ids */
+        $ids = $this->connection->fetchFirstColumn('
+            SELECT LOWER(HEX(`configurator_setting`.`id`))
+            FROM `product_configurator_setting` AS `configurator_setting`
+            INNER JOIN `product` ON `product`.`id` = `configurator_setting`.`product_id`
+            WHERE `product`.`product_number` LIKE :pattern
+        ', ['pattern' => 'SW-DEMO-%']);
+
+        $obsolete = \array_values(\array_diff($ids, $expected));
+
+        if ($obsolete === []) {
+            return;
+        }
+
+        $this->connection->executeStatement(
+            'DELETE FROM `product_configurator_setting` WHERE `id` IN (:ids)',
+            ['ids' => Uuid::fromHexToBytesList($obsolete)],
+            ['ids' => ArrayParameterType::BINARY],
+        );
+    }
+
     /**
      * @param array<string, mixed> $product
      * @param list<array{group: string, options: list<string>}> $variants
@@ -255,7 +415,7 @@ class ProductProvider extends DemoDataProvider
             static fn(string $optionId) => [
                 // deterministic id: the unique index on the configurator
                 // setting table rejects a second row for the same option
-                'id' => \md5($product['id'] . ':configurator:' . $optionId),
+                'id' => self::configuratorSettingId((string) $product['id'], $optionId),
                 'optionId' => $optionId,
             ],
             $optionIds,
@@ -263,11 +423,11 @@ class ProductProvider extends DemoDataProvider
 
         $children = [];
         $number = 0;
-        foreach ($this->combinations($variants) as $combination) {
+        foreach (self::combinations($variants) as $combination) {
             ++$number;
             $children[] = [
-                'id' => \md5($product['id'] . ':variant:' . $number),
-                'productNumber' => $product['productNumber'] . '.' . $number,
+                'id' => self::variantId((string) $product['id'], $number),
+                'productNumber' => self::variantNumber((string) $product['productNumber'], $number),
                 'stock' => (int) $product['stock'],
                 'options' => array_map(static fn(string $optionId) => ['id' => $optionId], $combination),
             ];
@@ -286,7 +446,7 @@ class ProductProvider extends DemoDataProvider
      *
      * @return list<list<string>>
      */
-    private function combinations(array $variants): array
+    private static function combinations(array $variants): array
     {
         $result = [[]];
         foreach ($variants as $variant) {
