@@ -44,6 +44,17 @@ for upstream attribution.
 
 The demo data is imported on activation and removed again on deactivation.
 
+### Every demo customer
+
+All demo customers share the password `shopwell123` and can be used to log in on the storefront.
+
+## Demo images
+
+The 91 product and banner images shipped in `src/Resources/media` were downloaded from
+[Pexels](https://www.pexels.com) and may be used free of charge under the
+[Pexels License](https://www.pexels.com/license/). They are demo content only —
+replace them before going live.
+
 ## License
 
 This project is licensed under the **Apache License 2.0**. See the [LICENSE](LICENSE) file for details.
