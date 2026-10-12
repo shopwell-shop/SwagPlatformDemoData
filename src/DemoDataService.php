@@ -43,6 +43,8 @@ class DemoDataService
     public function generate(Context $context): void
     {
         foreach ($this->getSortedDemoDataProviders('create') as $dataProvider) {
+            $dataProvider->prepare($context);
+
             $payload = [
                 [
                     'action' => $dataProvider->getAction(),

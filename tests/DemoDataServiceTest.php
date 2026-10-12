@@ -21,6 +21,7 @@ use Shopwell\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopwell\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopwell\Core\Framework\Log\Package;
 use Shopwell\Core\Framework\Uuid\Uuid;
+use Swag\PlatformDemoData\DataProvider\PromotionProvider;
 use Swag\PlatformDemoData\DataProvider\RuleProvider;
 use Swag\PlatformDemoData\DemoDataService;
 use Swag\PlatformDemoData\Helper\ResourceLoader;
@@ -40,7 +41,7 @@ class DemoDataServiceTest extends TestCase
     private const ORDER_COUNT = 30;
     private const TAG_COUNT = 20;
     private const PRODUCT_STREAM_COUNT = 30;
-    private const PROMOTION_COUNT = 30;
+    private const PROMOTION_COUNT = 5;
 
     private const IMAGES_PER_PRODUCT = 3;
 
@@ -186,6 +187,72 @@ class DemoDataServiceTest extends TestCase
             WHERE p.product_number LIKE "SW-DEMO-%"
         ');
         static::assertSame(self::PRODUCT_COUNT * 2, $crossSellings);
+    }
+
+    public function testDemoPromotionsCoverEveryDiscountType(): void
+    {
+        $connection = $this->getContainer()->get(Connection::class);
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        $discounts = $connection->fetchAllAssociative('
+            SELECT p.use_codes AS `useCodes`, d.scope AS `scope`, d.type AS `type`
+            FROM `promotion` p
+            INNER JOIN `promotion_discount` d ON d.promotion_id = p.id
+        ');
+
+        // one promotion per type, each of them with exactly one discount
+        $combinations = \array_map(
+            static fn(array $row): string => $row['scope'] . '/' . $row['type'] . '/' . $row['useCodes'],
+            $discounts,
+        );
+        \sort($combinations);
+
+        static::assertSame([
+            'cart/absolute/0',
+            'cart/absolute/1',
+            'cart/percentage/0',
+            'cart/percentage/1',
+            'delivery/percentage/0',
+        ], $combinations);
+
+        // both code based promotions carry a code, the automatic ones do not
+        static::assertSame(2, (int) $connection->fetchOne('SELECT COUNT(*) FROM `promotion` WHERE use_codes = 1 AND code IS NOT NULL'));
+
+        // every promotion is available in the storefront sales channel
+        static::assertSame(self::PROMOTION_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `promotion_sales_channel`'));
+    }
+
+    public function testGenerateUpgradesPromotionsOfOlderDemoDataSets(): void
+    {
+        $connection = $this->getContainer()->get(Connection::class);
+
+        // older versions shipped 30 promotions and used the code "SWDEMO-NEW"
+        // for the promotion with index 2, while the current set uses it for index 1
+        $createdAt = (new \DateTimeImmutable())->format(Defaults::STORAGE_DATE_TIME_FORMAT);
+        for ($index = 0; $index < 30; ++$index) {
+            $id = Uuid::fromHexToBytes(PromotionProvider::promotionId($index));
+            $connection->insert('promotion', [
+                'id' => $id,
+                'active' => 1,
+                'priority' => 10 + $index,
+                'code' => $index === 2 ? 'SWDEMO-NEW' : null,
+                'use_codes' => $index === 2 ? 1 : 0,
+                'created_at' => $createdAt,
+            ]);
+            $connection->insert('promotion_translation', [
+                'promotion_id' => $id,
+                'language_id' => Uuid::fromHexToBytes(Defaults::LANGUAGE_SYSTEM),
+                'name' => 'Legacy promotion ' . $index,
+                'created_at' => $createdAt,
+            ]);
+        }
+
+        // generating must not fail on the duplicated code and drops the outdated entries
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        static::assertSame(self::PROMOTION_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `promotion`'));
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `promotion_translation` WHERE `name` LIKE \'Legacy promotion %\''));
+        static::assertSame(2, (int) $connection->fetchOne('SELECT COUNT(*) FROM `promotion` WHERE use_codes = 1 AND code IS NOT NULL'));
     }
 
     public function testGenerateCreatesOrdersWithLineItems(): void

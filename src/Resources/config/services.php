@@ -96,7 +96,10 @@ return static function (ContainerConfigurator $container): void {
         ->tag('swag.demo_data.data_provider', ['priority' => 880]);
 
     $services->set(PromotionProvider::class)
-        ->args([service(Connection::class)])
+        ->args([
+            service(Connection::class),
+            service('promotion.repository'),
+        ])
         ->tag('swag.demo_data.data_provider', ['priority' => 690]);
 
     $services->set(OrderProvider::class)

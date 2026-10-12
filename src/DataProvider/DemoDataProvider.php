@@ -59,6 +59,12 @@ abstract class DemoDataProvider
         return $this->getPayload();
     }
 
+    /**
+     * Called before a provider sends its create payload, e.g. to remove rows
+     * that an older version of the demo data set left behind.
+     */
+    public function prepare(Context $context): void {}
+
     public function finalize(Context $context): void {}
 
     /**

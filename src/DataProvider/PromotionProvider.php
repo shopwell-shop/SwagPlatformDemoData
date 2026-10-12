@@ -11,25 +11,47 @@ declare(strict_types=1);
 namespace Swag\PlatformDemoData\DataProvider;
 
 use Doctrine\DBAL\Connection;
+use Shopwell\Core\Checkout\Promotion\Aggregate\PromotionDiscount\PromotionDiscountEntity;
+use Shopwell\Core\Checkout\Promotion\PromotionCollection;
 use Shopwell\Core\Defaults;
+use Shopwell\Core\Framework\Context;
+use Shopwell\Core\Framework\DataAbstractionLayer\EntityRepository;
+use Shopwell\Core\Framework\DataAbstractionLayer\Write\Validation\RestrictDeleteViolationException;
 use Shopwell\Core\Framework\Log\Package;
 use Shopwell\Core\Framework\Uuid\Uuid;
 use Swag\PlatformDemoData\Helper\TranslationHelper;
 
 /**
- * Creates a mix of automatically applied and code based promotions with
- * percentage discounts.
+ * Creates one promotion per discount type: a percentage cart discount, a
+ * percentage discount that needs a code, a fixed amount cart discount, a fixed
+ * amount discount that needs a code and a free shipping promotion.
  */
 #[Package('fundamentals@after-sales')]
 class PromotionProvider extends DemoDataProvider
 {
+    /**
+     * Amount of promotions that older versions of the demo data set shipped.
+     * Their deterministic ids are cleaned up as well, so that the promotion
+     * list of the shop cannot grow with outdated entries.
+     */
+    private const LEGACY_PROMOTION_COUNT = 30;
+
     private Connection $connection;
 
     private TranslationHelper $translationHelper;
 
-    public function __construct(Connection $connection)
+    /**
+     * @var EntityRepository<PromotionCollection>
+     */
+    private EntityRepository $promotionRepository;
+
+    /**
+     * @param EntityRepository<PromotionCollection> $promotionRepository
+     */
+    public function __construct(Connection $connection, EntityRepository $promotionRepository)
     {
         $this->connection = $connection;
+        $this->promotionRepository = $promotionRepository;
         $this->translationHelper = new TranslationHelper($connection);
     }
 
@@ -54,9 +76,56 @@ class PromotionProvider extends DemoDataProvider
         );
     }
 
+    /**
+     * @return list<string> deterministic ids of every promotion this plugin owns, including
+     *                      the ones that older versions of the data set shipped
+     */
+    public static function getAllDemoPromotionIds(): array
+    {
+        $count = \max(self::LEGACY_PROMOTION_COUNT, \count(self::getDemoPromotionIds()));
+
+        $ids = [];
+        for ($index = 0; $index < $count; ++$index) {
+            $ids[] = self::promotionId($index);
+        }
+
+        return $ids;
+    }
+
     public static function promotionId(int $index): string
     {
         return \md5('shopwell-demo-data:promotion:' . $index);
+    }
+
+    /**
+     * Clears the promotions before the current set is written. This is required,
+     * because an outdated promotion might still hold a code that the payload
+     * below reuses, and the platform rejects duplicated codes.
+     */
+    public function prepare(Context $context): void
+    {
+        try {
+            $this->promotionRepository->delete(
+                \array_map(static fn(string $id): array => ['id' => $id], self::getAllDemoPromotionIds()),
+                $context,
+            );
+        } catch (RestrictDeleteViolationException) {
+            // A demo promotion might be referenced by an order, keep it in that case.
+        }
+    }
+
+    /**
+     * Deactivating the plugin removes every promotion this plugin owns, including
+     * the ones of older demo data sets, otherwise they would stay in the shop forever.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function getDeletePayload(): array
+    {
+        return \array_map(
+            static fn(string $id): array => ['id' => $id],
+            self::getAllDemoPromotionIds(),
+        );
     }
 
     public function getPayload(): array
@@ -65,18 +134,22 @@ class PromotionProvider extends DemoDataProvider
 
         $payload = [];
         foreach (self::promotions() as $index => $promotion) {
+            $usesCode = isset($promotion['code']);
+
             $payload[] = [
                 'id' => self::promotionId($index),
                 'name' => $this->translationHelper->adjustTranslations($promotion['name']),
                 'active' => true,
                 'priority' => 10 + $index,
                 'exclusive' => false,
-                'useCodes' => isset($promotion['code']),
+                'useCodes' => $usesCode,
                 'code' => $promotion['code'] ?? null,
                 'useIndividualCodes' => false,
                 'useSetGroups' => false,
                 'preventCombination' => false,
-                'maxRedemptionsPerCustomer' => 1,
+                // A manually entered code is a one time welcome gift, the
+                // automatically applied discounts stay valid for every order.
+                'maxRedemptionsPerCustomer' => $usesCode ? 1 : null,
                 'salesChannels' => \array_map(
                     static fn(string $salesChannelId): array => [
                         'id' => \md5(self::promotionId($index) . ':sales-channel:' . $salesChannelId),
@@ -88,9 +161,9 @@ class PromotionProvider extends DemoDataProvider
                 'discounts' => [
                     [
                         'id' => \md5(self::promotionId($index) . ':discount:1'),
-                        'scope' => 'cart',
-                        'type' => 'percentage',
-                        'value' => $promotion['discount'],
+                        'scope' => $promotion['scope'],
+                        'type' => $promotion['type'],
+                        'value' => $promotion['value'],
                         'considerAdvancedRules' => false,
                     ],
                 ],
@@ -101,41 +174,43 @@ class PromotionProvider extends DemoDataProvider
     }
 
     /**
-     * @return list<array{name: array{zh-CN: string, en-GB: string}, code?: string, discount: float}>
+     * @return list<array{name: array{zh-CN: string, en-GB: string}, type: string, scope: string, value: float, code?: string}>
      */
     private static function promotions(): array
     {
         return [
-            ['name' => ['zh-CN' => '双11 狂欢盛典', 'en-GB' => 'Double 11 Festival'], 'discount' => 20.0],
-            ['name' => ['zh-CN' => '618 年中大促', 'en-GB' => '618 Mid-Year Sale'], 'discount' => 15.0],
-            ['name' => ['zh-CN' => '新人首单立减', 'en-GB' => 'Newcomer Deal'], 'code' => 'SWDEMO-NEW', 'discount' => 10.0],
-            ['name' => ['zh-CN' => '会员日专享', 'en-GB' => 'Members Day'], 'discount' => 8.0],
-            ['name' => ['zh-CN' => '年货节大促', 'en-GB' => 'Spring Festival Sale'], 'discount' => 12.0],
-            ['name' => ['zh-CN' => '开学季特惠', 'en-GB' => 'Back to School'], 'discount' => 10.0],
-            ['name' => ['zh-CN' => '女神节献礼', 'en-GB' => 'Women\'s Day'], 'discount' => 18.0],
-            ['name' => ['zh-CN' => '五一出游季', 'en-GB' => 'May Day Travel'], 'discount' => 9.0],
-            ['name' => ['zh-CN' => '六一儿童节', 'en-GB' => 'Children\'s Day'], 'code' => 'SWDEMO-KIDS', 'discount' => 15.0],
-            ['name' => ['zh-CN' => '端午粽香礼', 'en-GB' => 'Dragon Boat Gifts'], 'discount' => 10.0],
-            ['name' => ['zh-CN' => '中秋团圆购', 'en-GB' => 'Mid-Autumn Sale'], 'discount' => 14.0],
-            ['name' => ['zh-CN' => '国庆黄金周', 'en-GB' => 'Golden Week'], 'discount' => 16.0],
-            ['name' => ['zh-CN' => '双12 年终礼', 'en-GB' => 'Double 12 Finale'], 'discount' => 20.0],
-            ['name' => ['zh-CN' => '圣诞暖心购', 'en-GB' => 'Christmas Deals'], 'code' => 'SWDEMO-XMAS', 'discount' => 12.0],
-            ['name' => ['zh-CN' => '数码焕新季', 'en-GB' => 'Digital Upgrade'], 'discount' => 11.0],
-            ['name' => ['zh-CN' => '美妆焕肤节', 'en-GB' => 'Beauty Week'], 'discount' => 13.0],
-            ['name' => ['zh-CN' => '家居焕新日', 'en-GB' => 'Home Refresh'], 'discount' => 9.0],
-            ['name' => ['zh-CN' => '美食嘉年华', 'en-GB' => 'Food Carnival'], 'discount' => 10.0],
-            ['name' => ['zh-CN' => '服饰换新补贴', 'en-GB' => 'Wardrobe Refresh'], 'discount' => 15.0],
-            ['name' => ['zh-CN' => '老客回馈日', 'en-GB' => 'Loyalty Reward'], 'code' => 'SWDEMO-VIP', 'discount' => 25.0],
-            ['name' => ['zh-CN' => '周末闪购', 'en-GB' => 'Weekend Flash'], 'discount' => 7.0],
-            ['name' => ['zh-CN' => '深夜食堂补贴', 'en-GB' => 'Late Night Treats'], 'discount' => 8.0],
-            ['name' => ['zh-CN' => '绿色环保周', 'en-GB' => 'Eco Week'], 'discount' => 6.0],
-            ['name' => ['zh-CN' => '运动健身季', 'en-GB' => 'Sports Season'], 'discount' => 10.0],
-            ['name' => ['zh-CN' => '出行装备节', 'en-GB' => 'Travel Gear'], 'discount' => 9.0],
-            ['name' => ['zh-CN' => '母婴关爱日', 'en-GB' => 'Family Day'], 'discount' => 12.0],
-            ['name' => ['zh-CN' => '宠物友好日', 'en-GB' => 'Pet Friendly'], 'discount' => 10.0],
-            ['name' => ['zh-CN' => '茶咖满减日', 'en-GB' => 'Tea & Coffee Day'], 'discount' => 11.0],
-            ['name' => ['zh-CN' => '香水邂逅礼', 'en-GB' => 'Fragrance Encounter'], 'discount' => 14.0],
-            ['name' => ['zh-CN' => '周年庆狂欢', 'en-GB' => 'Anniversary Bash'], 'code' => 'SWDEMO-BDAY', 'discount' => 30.0],
+            [
+                'name' => ['zh-CN' => '双11 狂欢盛典 · 全场 9 折', 'en-GB' => 'Double 11 Festival · 10% Off'],
+                'type' => PromotionDiscountEntity::TYPE_PERCENTAGE,
+                'scope' => PromotionDiscountEntity::SCOPE_CART,
+                'value' => 10.0,
+            ],
+            [
+                'name' => ['zh-CN' => '新人首单立减 15%', 'en-GB' => 'Newcomer Deal · 15% Off'],
+                'type' => PromotionDiscountEntity::TYPE_PERCENTAGE,
+                'scope' => PromotionDiscountEntity::SCOPE_CART,
+                'value' => 15.0,
+                'code' => 'SWDEMO-NEW',
+            ],
+            [
+                'name' => ['zh-CN' => '下单立减 20 元', 'en-GB' => 'Instant Discount · 20 Off'],
+                'type' => PromotionDiscountEntity::TYPE_ABSOLUTE,
+                'scope' => PromotionDiscountEntity::SCOPE_CART,
+                'value' => 20.0,
+            ],
+            [
+                'name' => ['zh-CN' => '会员专享立减 50 元', 'en-GB' => 'VIP Exclusive · 50 Off'],
+                'type' => PromotionDiscountEntity::TYPE_ABSOLUTE,
+                'scope' => PromotionDiscountEntity::SCOPE_CART,
+                'value' => 50.0,
+                'code' => 'SWDEMO-VIP',
+            ],
+            [
+                'name' => ['zh-CN' => '全场包邮', 'en-GB' => 'Free Shipping'],
+                'type' => PromotionDiscountEntity::TYPE_PERCENTAGE,
+                'scope' => PromotionDiscountEntity::SCOPE_DELIVERY,
+                'value' => 100.0,
+            ],
         ];
     }
 

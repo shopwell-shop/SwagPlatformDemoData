@@ -16,7 +16,8 @@ Demo content currently shipped:
 - **30 customers** with realistic names, phone numbers, e-mail addresses and Chinese addresses
 - **30 orders** with line items pointing at real variants, delivery and payment state
 - **20 tags** assigned to products and customers
-- **30 dynamic product groups** and **30 promotions**
+- **30 dynamic product groups** and **5 promotions** (one per discount type: percentage, code based
+  percentage, fixed amount, code based fixed amount and free shipping)
 - Advanced prices, cross sellings, categories, property groups, cart rules, shipping methods and a
   demo landing page
 
