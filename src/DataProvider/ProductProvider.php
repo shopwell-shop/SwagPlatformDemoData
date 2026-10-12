@@ -24,6 +24,7 @@ use Swag\PlatformDemoData\Helper\ProductReviewHelper;
 use Swag\PlatformDemoData\Helper\ResourceLoader;
 use Swag\PlatformDemoData\Helper\TranslationHelper;
 use Symfony\Component\Clock\NativeClock;
+use Shopwell\Core\Framework\Util\Hasher;
 
 #[Package('fundamentals@after-sales')]
 class ProductProvider extends DemoDataProvider
@@ -133,7 +134,7 @@ class ProductProvider extends DemoDataProvider
                 continue;
             }
 
-            for ($number = 1; $number <= \count(self::combinations($variants)); ++$number) {
+            for ($number = 1; $number <= \count(self::combinations(self::variantGroups($variants))); ++$number) {
                 $products[] = [
                     'id' => self::variantId((string) $product['id'], $number),
                     'productNumber' => self::variantNumber((string) $product['productNumber'], $number),
@@ -159,7 +160,7 @@ class ProductProvider extends DemoDataProvider
                 continue;
             }
 
-            for ($number = 1; $number <= \count(self::combinations($variants)); ++$number) {
+            for ($number = 1; $number <= \count(self::combinations(self::variantGroups($variants))); ++$number) {
                 $numbers[] = self::variantNumber((string) $product['productNumber'], $number);
             }
         }
@@ -169,7 +170,7 @@ class ProductProvider extends DemoDataProvider
 
     public static function variantId(string $productId, int $number): string
     {
-        return \md5($productId . ':variant:' . $number);
+        return Hasher::hash($productId . ':variant:' . $number, 'md5');
     }
 
     public static function variantNumber(string $productNumber, int $number): string
@@ -182,7 +183,7 @@ class ProductProvider extends DemoDataProvider
      */
     public static function configuratorSettingId(string $productId, string $optionId): string
     {
-        return \md5($productId . ':configurator:' . $optionId);
+        return Hasher::hash($productId . ':configurator:' . $optionId, 'md5');
     }
 
     /**
@@ -200,6 +201,7 @@ class ProductProvider extends DemoDataProvider
      * @param array<string, mixed> $product
      * @param array{0: string, 1: float} $tax
      * @param array<string, string> $languageIds
+     * @param list<string> $customerIds
      *
      * @return array<string, mixed>
      */
@@ -222,7 +224,7 @@ class ProductProvider extends DemoDataProvider
         $media = [];
         foreach ($mediaIds as $position => $mediaId) {
             $media[] = [
-                'id' => \md5($productId . ':media:' . $position),
+                'id' => Hasher::hash($productId . ':media:' . $position, 'md5'),
                 'position' => $position + 1,
                 'mediaId' => $mediaId,
             ];
@@ -267,7 +269,7 @@ class ProductProvider extends DemoDataProvider
             ]],
             // Advanced price: a member price for the demo customer group rule.
             'prices' => [[
-                'id' => \md5($productId . ':advanced-price:1'),
+                'id' => Hasher::hash($productId . ':advanced-price:1', 'md5'),
                 'ruleId' => RuleProvider::CUSTOMER_GROUP_RULE_ID,
                 'quantityStart' => 1,
                 'price' => [[
@@ -279,7 +281,7 @@ class ProductProvider extends DemoDataProvider
             ]],
             'crossSellings' => [
                 [
-                    'id' => \md5($productId . ':cross-selling:1'),
+                    'id' => Hasher::hash($productId . ':cross-selling:1', 'md5'),
                     'name' => $this->translationHelper->adjustTranslations([
                         'zh-CN' => '看了又看',
                         'en-GB' => 'You may also like',
@@ -293,7 +295,7 @@ class ProductProvider extends DemoDataProvider
                     'productStreamId' => ProductStreamProvider::categoryId($product['categories'][0]),
                 ],
                 [
-                    'id' => \md5($productId . ':cross-selling:2'),
+                    'id' => Hasher::hash($productId . ':cross-selling:2', 'md5'),
                     'name' => $this->translationHelper->adjustTranslations([
                         'zh-CN' => '猜你喜欢',
                         'en-GB' => 'Recommended for you',
@@ -313,7 +315,7 @@ class ProductProvider extends DemoDataProvider
             ),
             'visibilities' => [
                 [
-                    'id' => \md5($productId . ':visibility'),
+                    'id' => Hasher::hash($productId . ':visibility', 'md5'),
                     'salesChannelId' => $storefrontSalesChannel,
                     'visibility' => ProductVisibilityDefinition::VISIBILITY_ALL,
                 ],
@@ -460,6 +462,43 @@ class ProductProvider extends DemoDataProvider
         }
 
         return $result;
+    }
+
+    /**
+     * Reads the variant groups of a product and drops entries that do not
+     * follow the structure of products.json.
+     *
+     * @param array<mixed> $variants
+     *
+     * @return list<array{group: string, options: list<string>}>
+     */
+    private static function variantGroups(array $variants): array
+    {
+        $groups = [];
+
+        foreach ($variants as $variant) {
+            if (!\is_array($variant)) {
+                continue;
+            }
+
+            $group = $variant['group'] ?? null;
+            $options = $variant['options'] ?? null;
+
+            if (!\is_string($group) || !\is_array($options)) {
+                continue;
+            }
+
+            $optionIds = [];
+            foreach ($options as $optionId) {
+                if (\is_string($optionId)) {
+                    $optionIds[] = $optionId;
+                }
+            }
+
+            $groups[] = ['group' => $group, 'options' => $optionIds];
+        }
+
+        return $groups;
     }
 
     /**

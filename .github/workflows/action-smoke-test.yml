@@ -12,11 +12,13 @@ jobs:
     name: Smoke test
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Job level on purpose: the uninstall below is a separate step and would
+    # otherwise connect with the credentials from the .env of the platform.
+    env:
+      DATABASE_URL: mysql://root@127.0.0.1/shopwell
     steps:
       - name: Setup extension
         uses: shopwell-shop/github-actions/setup-extension@main
-        env:
-          DATABASE_URL: mysql://root@127.0.0.1/shopwell
         with:
           extensionName: ${{ inputs.extension_name }}
           install: true

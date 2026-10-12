@@ -13,6 +13,7 @@ namespace Swag\PlatformDemoData\DataProvider;
 use Doctrine\DBAL\Connection;
 use Shopwell\Core\Framework\Log\Package;
 use Swag\PlatformDemoData\Helper\DbHelper;
+use Shopwell\Core\Framework\Util\Hasher;
 
 #[Package('fundamentals@after-sales')]
 class TagProvider extends DemoDataProvider
@@ -89,7 +90,7 @@ class TagProvider extends DemoDataProvider
 
     public static function tagId(int $index): string
     {
-        return \md5('shopwell-demo-data:tag:' . $index);
+        return Hasher::hash('shopwell-demo-data:tag:' . $index, 'md5');
     }
 
     public function getPayload(): array

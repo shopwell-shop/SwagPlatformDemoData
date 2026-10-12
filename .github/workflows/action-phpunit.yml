@@ -22,11 +22,14 @@ jobs:
     name: PHPUnit
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # The database URL has to live on the job level: a step level `env` only
+    # applies to that single step, so the PHPUnit run below would fall back to
+    # the .env of the platform and bootstrap against a wrong database.
+    env:
+      DATABASE_URL: mysql://root@127.0.0.1/shopwell
     steps:
       - name: Setup extension
         uses: shopwell-shop/github-actions/setup-extension@main
-        env:
-          DATABASE_URL: mysql://root@127.0.0.1/shopwell
         with:
           extensionName: ${{ inputs.extension_name }}
           install: true

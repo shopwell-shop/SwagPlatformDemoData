@@ -14,6 +14,7 @@ use Doctrine\DBAL\Connection;
 use Shopwell\Core\Framework\Log\Package;
 use Swag\PlatformDemoData\Helper\ResourceLoader;
 use Swag\PlatformDemoData\Helper\TranslationHelper;
+use Shopwell\Core\Framework\Util\Hasher;
 
 /**
  * Creates one dynamic product group per demo category plus a few condition
@@ -23,13 +24,10 @@ use Swag\PlatformDemoData\Helper\TranslationHelper;
 #[Package('fundamentals@after-sales')]
 class ProductStreamProvider extends DemoDataProvider
 {
-    private Connection $connection;
-
     private TranslationHelper $translationHelper;
 
     public function __construct(Connection $connection)
     {
-        $this->connection = $connection;
         $this->translationHelper = new TranslationHelper($connection);
     }
 
@@ -56,12 +54,12 @@ class ProductStreamProvider extends DemoDataProvider
 
     public static function categoryId(string $categoryId): string
     {
-        return \md5('shopwell-demo-data:product-stream:category:' . $categoryId);
+        return Hasher::hash('shopwell-demo-data:product-stream:category:' . $categoryId, 'md5');
     }
 
     public static function specialId(int $index): string
     {
-        return \md5('shopwell-demo-data:product-stream:special:' . $index);
+        return Hasher::hash('shopwell-demo-data:product-stream:special:' . $index, 'md5');
     }
 
     public function getPayload(): array
@@ -72,7 +70,7 @@ class ProductStreamProvider extends DemoDataProvider
         foreach (self::getCategories() as $category) {
             $filters = [
                 [
-                    'id' => \md5('shopwell-demo-data:product-stream-filter:category:' . $category['id']),
+                    'id' => Hasher::hash('shopwell-demo-data:product-stream-filter:category:' . $category['id'], 'md5'),
                     'type' => 'equalsAny',
                     'field' => 'categoriesRo.id',
                     'value' => \implode('|', $this->expandCategory($category)),
@@ -214,6 +212,8 @@ class ProductStreamProvider extends DemoDataProvider
 
     /**
      * @param array<string, float>|null $parameters
+     *
+     * @return array<string, mixed>
      */
     private static function specialFilter(
         int $index,
@@ -223,7 +223,7 @@ class ProductStreamProvider extends DemoDataProvider
         ?array $parameters = null,
     ): array {
         $filter = [
-            'id' => \md5('shopwell-demo-data:product-stream-filter:special:' . $index),
+            'id' => Hasher::hash('shopwell-demo-data:product-stream-filter:special:' . $index, 'md5'),
             'type' => $type,
             'field' => $field,
             'position' => 0,

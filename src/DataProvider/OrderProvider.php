@@ -17,8 +17,8 @@ use Shopwell\Core\Defaults;
 use Shopwell\Core\Framework\Log\Package;
 use Shopwell\Core\Framework\Uuid\Uuid;
 use Psr\Clock\ClockInterface;
-use Swag\PlatformDemoData\Helper\TranslationHelper;
 use Symfony\Component\Clock\NativeClock;
+use Shopwell\Core\Framework\Util\Hasher;
 
 /**
  * Creates demo orders for the demo customers and products, including line
@@ -36,14 +36,11 @@ class OrderProvider extends DemoDataProvider
 
     private Connection $connection;
 
-    private TranslationHelper $translationHelper;
-
     private ClockInterface $clock;
 
     public function __construct(Connection $connection, ?ClockInterface $clock = null)
     {
         $this->connection = $connection;
-        $this->translationHelper = new TranslationHelper($connection);
         $this->clock = $clock ?? new NativeClock();
     }
 
@@ -85,7 +82,7 @@ class OrderProvider extends DemoDataProvider
 
     public static function orderId(int $index): string
     {
-        return \md5('shopwell-demo-data:order:' . $index);
+        return Hasher::hash('shopwell-demo-data:order:' . $index, 'md5');
     }
 
     public function getPayload(): array
@@ -145,7 +142,7 @@ class OrderProvider extends DemoDataProvider
 
             /** @var array<string, mixed> $address */
             $address = $customer['address'];
-            $orderAddressId = \md5($orderId . ':address:1');
+            $orderAddressId = Hasher::hash($orderId . ':address:1', 'md5');
 
             $order = [
                 'id' => $orderId,
@@ -174,7 +171,7 @@ class OrderProvider extends DemoDataProvider
                 ],
                 'shippingCosts' => $shippingCosts,
                 'orderCustomer' => [
-                    'id' => \md5($orderId . ':order-customer'),
+                    'id' => Hasher::hash($orderId . ':order-customer', 'md5'),
                     'email' => $customer['email'],
                     'name' => $customer['name'],
                     'customerId' => $customerIds[$index % \count($customerIds)],
@@ -191,7 +188,7 @@ class OrderProvider extends DemoDataProvider
                 ]],
                 'lineItems' => $items,
                 'deliveries' => [[
-                    'id' => \md5($orderId . ':delivery:1'),
+                    'id' => Hasher::hash($orderId . ':delivery:1', 'md5'),
                     'shippingOrderAddressId' => $orderAddressId,
                     'shippingMethodId' => $shippingMethodId,
                     'stateId' => $deliveryState,
@@ -201,7 +198,7 @@ class OrderProvider extends DemoDataProvider
                     'trackingCodes' => [],
                 ]],
                 'transactions' => [[
-                    'id' => \md5($orderId . ':transaction:1'),
+                    'id' => Hasher::hash($orderId . ':transaction:1', 'md5'),
                     'paymentMethodId' => $paymentMethodId,
                     'amount' => $this->calculatedPrice($totalPrice, 1, $taxRate),
                     'stateId' => $transactionState,
@@ -230,7 +227,7 @@ class OrderProvider extends DemoDataProvider
         $unitPrice = (float) $product['grossPrice'];
 
         return [
-            'id' => \md5($orderId . ':line-item:' . $position),
+            'id' => Hasher::hash($orderId . ':line-item:' . $position, 'md5'),
             'identifier' => $product['productNumber'],
             'referencedId' => $product['id'],
             'productId' => $product['id'],

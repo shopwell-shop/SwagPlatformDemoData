@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Swag\PlatformDemoData\DataProvider;
 
 use Shopwell\Core\Framework\Log\Package;
+use Shopwell\Core\Framework\Util\Hasher;
 
 #[Package('fundamentals@after-sales')]
 class TaxProvider extends DemoDataProvider
@@ -43,6 +44,6 @@ class TaxProvider extends DemoDataProvider
 
     public static function taxId(): string
     {
-        return \md5('shopwell-demo-data:tax:standard');
+        return Hasher::hash('shopwell-demo-data:tax:standard', 'md5');
     }
 }

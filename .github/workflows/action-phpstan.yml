@@ -12,11 +12,13 @@ jobs:
     name: PHPStan
     runs-on: ubuntu-latest
     timeout-minutes: 60
+    # Job level on purpose: the phpstan bootstrap below builds the container and
+    # needs the URL in its own step, not only while the extension is set up.
+    env:
+      DATABASE_URL: mysql://root@127.0.0.1/shopwell
     steps:
       - name: Setup extension
         uses: shopwell-shop/github-actions/setup-extension@main
-        env:
-          DATABASE_URL: mysql://root@127.0.0.1/shopwell
         with:
           extensionName: ${{ inputs.extension_name }}
           install: true

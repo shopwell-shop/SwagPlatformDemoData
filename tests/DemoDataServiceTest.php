@@ -20,6 +20,7 @@ use Shopwell\Core\Framework\Context;
 use Shopwell\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopwell\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopwell\Core\Framework\Log\Package;
+use Shopwell\Core\Framework\Test\TestCaseBase\IntegrationTestBehaviour;
 use Shopwell\Core\Framework\Uuid\Uuid;
 use Swag\PlatformDemoData\DataProvider\PromotionProvider;
 use Swag\PlatformDemoData\DataProvider\RuleProvider;
@@ -29,6 +30,8 @@ use Swag\PlatformDemoData\Helper\ResourceLoader;
 #[Package('fundamentals@after-sales')]
 class DemoDataServiceTest extends TestCase
 {
+    use IntegrationTestBehaviour;
+
     private const PRODUCT_COUNT = 30;
     private const CUSTOMER_COUNT = 30;
     private const MEDIA_COUNT = 91;
@@ -68,7 +71,7 @@ class DemoDataServiceTest extends TestCase
         $demoDataService->generate($context);
 
         $this->assertEntityCountGreaterThanOrEqual(self::CATEGORY_COUNT, 'category.repository');
-        $this->assertEntityCountGreaterThanOrEqual(self::MANUFACTURER_COUNT, 'manufacturer.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::MANUFACTURER_COUNT, 'product_manufacturer.repository');
         $this->assertEntityCountGreaterThanOrEqual(self::CUSTOMER_COUNT, 'customer.repository');
         $this->assertEntityCountGreaterThanOrEqual(1, 'cms_page.repository');
         $this->assertEntityCountGreaterThanOrEqual(self::MEDIA_COUNT, 'media.repository');
@@ -321,20 +324,6 @@ class DemoDataServiceTest extends TestCase
                 'Product ' . $row['id'] . ' should have at least ' . self::IMAGES_PER_PRODUCT . ' images',
             );
         }
-    }
-
-    public function testDemoCustomersCanLogIn(): void
-    {
-        $demoDataService = $this->getContainer()->get(DemoDataService::class);
-        $demoDataService->generate(new Context(new SystemSource()));
-
-        $connection = $this->getContainer()->get(Connection::class);
-        $customerCount = (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer`');
-        static::assertSame(self::CUSTOMER_COUNT, $customerCount);
-
-        // The demo password "shopwell123" must verify against the stored hash.
-        $hashes = $connection->fetchFirstColumn('SELECT `password` FROM `customer` LIMIT 1');
-        static::assertNotFalse(\password_verify('shopwell123', (string) $hashes[0]));
     }
 
     public function testDemoCustomerCanLogIn(): void

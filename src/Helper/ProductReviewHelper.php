@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Swag\PlatformDemoData\Helper;
 
 use Shopwell\Core\Framework\Log\Package;
+use Shopwell\Core\Framework\Util\Hasher;
 
 #[Package('fundamentals@after-sales')]
 class ProductReviewHelper
@@ -60,7 +61,7 @@ class ProductReviewHelper
             $customerId = $customerIds[($productIndex * 3 + ($locale === 'zh-CN' ? 0 : 1)) % \count($customerIds)];
 
             $reviews[] = [
-                'id' => \md5('shopwell-demo-data:review:' . $productIndex . ':' . $locale),
+                'id' => Hasher::hash('shopwell-demo-data:review:' . $productIndex . ':' . $locale, 'md5'),
                 'salesChannelId' => $salesChannelId,
                 'customerId' => $customerId,
                 'languageId' => $languageId,

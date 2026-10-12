@@ -18,19 +18,23 @@
         "copyright": "(c) by Shopwell",
         "label": {
             "zh-CN": "Shopwell 演示数据",
-            "en-GB": "Shopwell Demo data"
+            "en-GB": "Shopwell Demo data",
+            "de-DE": "Shopwell Demo-Daten"
         },
         "description": {
             "zh-CN": "Shopwell 演示数据插件，仅供开发与测试环境使用。插件激活时会导入演示数据并覆盖已有数据，请勿在生产环境使用。",
-            "en-GB": "Demo data plugin for Shopwell. For development and testing environments only. The data is imported on plugin activation and overwrites existing data. Do not use in production."
+            "en-GB": "Demo data plugin for Shopwell. For development and testing environments only. The data is imported on plugin activation and overwrites existing data. Do not use in production.",
+            "de-DE": "Demo-Daten-Plugin für Shopwell. Nur für Entwicklung und Tests: Beim Aktivieren werden Demo-Daten importiert und vorhandene Daten überschrieben. Auf Produktivsystemen nicht einsetzen."
         },
         "manufacturerLink": {
             "zh-CN": "https://www.shopwell.cn",
-            "en-GB": "https://www.shopwell.cn"
+            "en-GB": "https://www.shopwell.cn",
+            "de-DE": "https://www.shopwell.cn"
         },
         "supportLink": {
             "zh-CN": "https://www.shopwell.cn",
-            "en-GB": "https://www.shopwell.cn"
+            "en-GB": "https://www.shopwell.cn",
+            "de-DE": "https://www.shopwell.cn"
         }
     },
     "autoload": {

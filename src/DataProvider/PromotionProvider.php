@@ -20,6 +20,7 @@ use Shopwell\Core\Framework\DataAbstractionLayer\Write\Validation\RestrictDelete
 use Shopwell\Core\Framework\Log\Package;
 use Shopwell\Core\Framework\Uuid\Uuid;
 use Swag\PlatformDemoData\Helper\TranslationHelper;
+use Shopwell\Core\Framework\Util\Hasher;
 
 /**
  * Creates one promotion per discount type: a percentage cart discount, a
@@ -94,7 +95,7 @@ class PromotionProvider extends DemoDataProvider
 
     public static function promotionId(int $index): string
     {
-        return \md5('shopwell-demo-data:promotion:' . $index);
+        return Hasher::hash('shopwell-demo-data:promotion:' . $index, 'md5');
     }
 
     /**
@@ -152,7 +153,7 @@ class PromotionProvider extends DemoDataProvider
                 'maxRedemptionsPerCustomer' => $usesCode ? 1 : null,
                 'salesChannels' => \array_map(
                     static fn(string $salesChannelId): array => [
-                        'id' => \md5(self::promotionId($index) . ':sales-channel:' . $salesChannelId),
+                        'id' => Hasher::hash(self::promotionId($index) . ':sales-channel:' . $salesChannelId, 'md5'),
                         'salesChannelId' => $salesChannelId,
                         'priority' => 1,
                     ],
@@ -160,7 +161,7 @@ class PromotionProvider extends DemoDataProvider
                 ),
                 'discounts' => [
                     [
-                        'id' => \md5(self::promotionId($index) . ':discount:1'),
+                        'id' => Hasher::hash(self::promotionId($index) . ':discount:1', 'md5'),
                         'scope' => $promotion['scope'],
                         'type' => $promotion['type'],
                         'value' => $promotion['value'],
