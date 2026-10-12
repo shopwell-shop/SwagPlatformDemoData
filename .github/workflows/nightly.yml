@@ -21,13 +21,12 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shopware-version:
+        shopwell-version:
           - trunk
-          - 6.6.x
     uses: ./.github/workflows/action-phpunit.yml
     with:
       extension_name: ${{ github.event.repository.name }}
-      platform_branch: ${{ matrix.shopware-version }}
+      platform_branch: ${{ matrix.shopwell-version }}
 
   smoke_test:
     name: Smoke test

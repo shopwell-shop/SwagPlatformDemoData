@@ -14,9 +14,9 @@ jobs:
     timeout-minutes: 60
     steps:
       - name: Setup extension
-        uses: shopware/github-actions/setup-extension@main
+        uses: shopwell-shop/github-actions/setup-extension@main
         env:
-          DATABASE_URL: mysql://root@127.0.0.1/shopware
+          DATABASE_URL: mysql://root@127.0.0.1/shopwell
         with:
           extensionName: ${{ inputs.extension_name }}
           install: true

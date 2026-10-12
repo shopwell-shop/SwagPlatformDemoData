@@ -9,6 +9,6 @@ on:
 jobs:
   build:
     name: Build
-    uses: shopware/github-actions/.github/workflows/build-zip.yml@main
+    uses: shopwell-shop/github-actions/.github/workflows/build-zip.yml@main
     with:
       extensionName: '${{ github.event.repository.name }}'

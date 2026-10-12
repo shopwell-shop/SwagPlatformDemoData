@@ -16,7 +16,7 @@ jobs:
     name: Codestyle
     runs-on: ubuntu-latest
     steps:
-      - uses: shopware/github-actions/cs-fixer@main
+      - uses: shopwell-shop/github-actions/cs-fixer@main
         with:
           rules: ''
 
@@ -40,7 +40,7 @@ jobs:
         run: composer config policy.advisories.block false
 
       - name: Run verifier
-        uses: shopware/github-actions/extension-verifier@main
+        uses: shopwell-shop/github-actions/extension-verifier@main
         with:
           action: check
           check-against: lowest
@@ -50,14 +50,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        shopware-version:
+        shopwell-version:
           - trunk
-          - 6.6.x
     uses: ./.github/workflows/action-phpunit.yml
     with:
       extension_name: ${{ github.event.repository.name }}
-      platform_branch: ${{ matrix.shopware-version }}
-      coverage: ${{ matrix.shopware-version == 'trunk' }}
+      platform_branch: ${{ matrix.shopwell-version }}
+      coverage: ${{ matrix.shopwell-version == 'trunk' }}
     secrets:
       CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
