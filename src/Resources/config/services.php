@@ -9,6 +9,11 @@ use Shopwell\Core\Framework\Api\Controller\SyncController;
 use Swag\PlatformDemoData\DataProvider\CategoryProvider;
 use Swag\PlatformDemoData\DataProvider\CmsPageProvider;
 use Swag\PlatformDemoData\DataProvider\CustomerProvider;
+use Swag\PlatformDemoData\DataProvider\ManufacturerProvider;
+use Swag\PlatformDemoData\DataProvider\OrderProvider;
+use Swag\PlatformDemoData\DataProvider\ProductStreamProvider;
+use Swag\PlatformDemoData\DataProvider\PromotionProvider;
+use Swag\PlatformDemoData\DataProvider\TagProvider;
 use Swag\PlatformDemoData\DataProvider\MediaProvider;
 use Swag\PlatformDemoData\DataProvider\ProductProvider;
 use Swag\PlatformDemoData\DataProvider\PropertyProvider;
@@ -32,6 +37,7 @@ return static function (ContainerConfigurator $container): void {
         ->args([
             service(Connection::class),
             service(FileSaver::class),
+            '%kernel.project_dir%/public',
         ])
         ->tag('swag.demo_data.data_provider', ['priority' => 1100]);
 
@@ -65,6 +71,10 @@ return static function (ContainerConfigurator $container): void {
         ->args([service(Connection::class)])
         ->tag('swag.demo_data.data_provider', ['priority' => 500]);
 
+    $services->set(ManufacturerProvider::class)
+        ->args([service(Connection::class)])
+        ->tag('swag.demo_data.data_provider', ['priority' => 450]);
+
     $services->set(ProductProvider::class)
         ->args([
             service(Connection::class),
@@ -75,4 +85,23 @@ return static function (ContainerConfigurator $container): void {
     $services->set(ShippingMethodProvider::class)
         ->args([service(Connection::class)])
         ->tag('swag.demo_data.data_provider', ['priority' => 200]);
+
+    $services->set(TagProvider::class)
+        ->args([service(Connection::class)])
+        ->tag('swag.demo_data.data_provider', ['priority' => 1200]);
+
+    $services->set(ProductStreamProvider::class)
+        ->args([service(Connection::class)])
+        ->tag('swag.demo_data.data_provider', ['priority' => 880]);
+
+    $services->set(PromotionProvider::class)
+        ->args([service(Connection::class)])
+        ->tag('swag.demo_data.data_provider', ['priority' => 690]);
+
+    $services->set(OrderProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 300]);
 };

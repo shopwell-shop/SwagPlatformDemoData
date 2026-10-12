@@ -66,6 +66,20 @@ class CustomerProvider extends DemoDataProvider
         );
     }
 
+    /**
+     * @return array<string, mixed> the demo customer with the given id
+     */
+    public static function getDemoCustomer(string $customerId): array
+    {
+        foreach (self::getCustomers() as $customer) {
+            if ($customer['id'] === $customerId) {
+                return $customer;
+            }
+        }
+
+        throw new \RuntimeException(\sprintf('Demo customer "%s" not found.', $customerId));
+    }
+
     public function getPayload(): array
     {
         $salutationIds = $this->getSalutationIds();
@@ -74,7 +88,7 @@ class CustomerProvider extends DemoDataProvider
         $salesChannelId = $this->getStorefrontSalesChannelId();
 
         $payload = [];
-        foreach (self::getCustomers() as $customer) {
+        foreach (self::getCustomers() as $index => $customer) {
             /** @var array<string, mixed> $address */
             $address = $customer['address'];
             $salutationId = $salutationIds[$customer['salutationKey']] ?? $salutationIds['not_specified'];
@@ -95,6 +109,10 @@ class CustomerProvider extends DemoDataProvider
                 'birthday' => $customer['birthday'],
                 'accountType' => 'private',
                 'groupId' => 'cfbd5018d38d41d8adca10d94fc8bdd6',
+                'tags' => array_map(
+                    static fn(int $tagIndex) => ['id' => TagProvider::tagId($tagIndex)],
+                    self::tagIndexesFor($index),
+                ),
                 'defaultShippingAddress' => [
                     'id' => $address['id'],
                     'countryId' => $countryId,
@@ -111,6 +129,21 @@ class CustomerProvider extends DemoDataProvider
         }
 
         return $payload;
+    }
+
+    /**
+     * Two tags per customer, rotated deterministically over the demo tags.
+     *
+     * @return list<int>
+     */
+    private static function tagIndexesFor(int $customerIndex): array
+    {
+        $tagCount = \count(TagProvider::getDemoTagIds());
+
+        return [
+            $customerIndex % $tagCount,
+            ($customerIndex + 5) % $tagCount,
+        ];
     }
 
     /**

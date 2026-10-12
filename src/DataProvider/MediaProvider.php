@@ -24,10 +24,21 @@ class MediaProvider extends DemoDataProvider
 
     private Connection $connection;
 
-    public function __construct(Connection $connection, FileSaver $fileSaver)
+    /**
+     * Paths of the demo media files inside the public directory, collected
+     * while the delete payload is built and removed afterwards.
+     *
+     * @var list<string>
+     */
+    private array $pendingPublicPaths = [];
+
+    private string $publicDir;
+
+    public function __construct(Connection $connection, FileSaver $fileSaver, string $publicDir)
     {
         $this->fileSaver = $fileSaver;
         $this->connection = $connection;
+        $this->publicDir = $publicDir;
     }
 
     public function getAction(): string
@@ -84,28 +95,75 @@ class MediaProvider extends DemoDataProvider
         throw new \RuntimeException('No CMS demo media found in media.json');
     }
 
+    /**
+     * Persists the shipped image files and assigns them to the media entities.
+     *
+     * The file name comes from media.json and has to be unique across the whole
+     * media table: FileSaver::ensureFileNameIsUnique() rejects a second media with
+     * the same file name and extension, so a per-directory "1.jpg" naming scheme
+     * would abort the import with `A file with the name "1.jpg" already exists.`
+     */
     public function finalize(Context $context): void
     {
-        $files = \glob(__DIR__ . '/../Resources/media/*/*.jpg');
-        if ($files === false) {
-            return;
-        }
+        foreach (self::getMedia() as $media) {
+            $source = \sprintf('%s/../Resources/media/%s/%s', __DIR__, $media['id'], $media['file']);
 
-        foreach ($files as $file) {
+            if (!\is_file($source)) {
+                throw new \RuntimeException(\sprintf('Demo media file "%s" is missing.', $source));
+            }
+
             $this->fileSaver->persistFileToMedia(
                 new MediaFile(
-                    $file,
-                    \mime_content_type($file) ?: 'application/octet-stream',
-                    \pathinfo($file, \PATHINFO_EXTENSION),
-                    \filesize($file) ?: 0,
+                    $source,
+                    \mime_content_type($source) ?: 'application/octet-stream',
+                    \pathinfo($source, \PATHINFO_EXTENSION),
+                    \filesize($source) ?: 0,
                 ),
-                \pathinfo($file, \PATHINFO_FILENAME),
-                \basename(\dirname($file)),
+                \pathinfo($media['file'], \PATHINFO_FILENAME),
+                $media['id'],
                 $context,
             );
         }
 
         parent::finalize($context);
+    }
+
+    /**
+     * Collects the public paths of the demo media files before the rows are
+     * deleted: deleting the media rows does not remove the files.
+     */
+    public function getDeletePayload(): array
+    {
+        $this->pendingPublicPaths = [];
+
+        $rows = $this->connection->fetchAllAssociative('
+            SELECT `path`
+            FROM `media`
+            WHERE `file_name` LIKE :prefix
+              AND `path` IS NOT NULL
+        ', ['prefix' => 'SW-DEMO-%']);
+
+        foreach ($rows as $row) {
+            $this->pendingPublicPaths[] = (string) $row['path'];
+        }
+
+        return parent::getDeletePayload();
+    }
+
+    /**
+     * Removes the shipped image files from the public directory.
+     */
+    public function finalizeDelete(Context $context): void
+    {
+        foreach ($this->pendingPublicPaths as $path) {
+            $file = $this->publicDir . '/' . $path;
+
+            if (\is_file($file)) {
+                @\unlink($file);
+            }
+        }
+
+        $this->pendingPublicPaths = [];
     }
 
     private function getDefaultFolderIdForEntity(string $entity): string

@@ -10,6 +10,7 @@ declare(strict_types=1);
 
 namespace Swag\PlatformDemoData\DataProvider;
 
+use Shopwell\Core\Framework\Api\Controller\SyncController;
 use Shopwell\Core\Framework\Context;
 use Shopwell\Core\Framework\Log\Package;
 
@@ -36,5 +37,33 @@ abstract class DemoDataProvider
         ];
     }
 
+    /**
+     * The sync action used during the delete sequence.
+     *
+     * Providers that do not own their entities but only modify existing platform
+     * data return "upsert" here, so the delete sequence reverses that change
+     * instead of removing rows that belong to the shop.
+     */
+    public function getDeleteAction(): string
+    {
+        return SyncController::ACTION_DELETE;
+    }
+
+    /**
+     * The payload used during the delete sequence, defaults to the create payload.
+     *
+     * @return list<array<string, mixed>>
+     */
+    public function getDeletePayload(): array
+    {
+        return $this->getPayload();
+    }
+
     public function finalize(Context $context): void {}
+
+    /**
+     * Called after a provider ran its delete sequence, e.g. to remove files
+     * that the platform keeps on the filesystem when the rows are gone.
+     */
+    public function finalizeDelete(Context $context): void {}
 }

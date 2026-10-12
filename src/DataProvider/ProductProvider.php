@@ -24,6 +24,11 @@ use Symfony\Component\Clock\NativeClock;
 #[Package('fundamentals@after-sales')]
 class ProductProvider extends DemoDataProvider
 {
+    /**
+     * The factor applied to the gross price to get the demo member price.
+     */
+    public const MEMBER_DISCOUNT = 0.9;
+
     private Connection $connection;
 
     private TranslationHelper $translationHelper;
@@ -61,17 +66,30 @@ class ProductProvider extends DemoDataProvider
         ];
     }
 
+    /**
+     * @return list<array<string, mixed>> all shipped demo products, in the order they are defined
+     */
+    public static function getDemoProducts(): array
+    {
+        /** @var array<string, mixed> $resource */
+        $resource = ResourceLoader::load('products.json');
+
+        /** @var list<array<string, mixed>> $products */
+        $products = $resource['products'];
+
+        return $products;
+    }
+
     public function getPayload(): array
     {
         $tax = $this->getTax();
         $storefrontSalesChannel = $this->getStorefrontSalesChannel();
         $languageIds = $this->translationHelper->getAvailableLanguageIds(['zh-CN', 'en-GB']);
-        $manufacturers = $this->getManufacturersById();
         $customerIds = CustomerProvider::getDemoCustomerIds();
 
         $payload = [];
-        foreach ($this->getProducts() as $index => $product) {
-            $payload[] = $this->buildProduct($index, $product, $tax, $manufacturers, $storefrontSalesChannel, $languageIds, $customerIds);
+        foreach (self::getDemoProducts() as $index => $product) {
+            $payload[] = $this->buildProduct($index, $product, $tax, $storefrontSalesChannel, $languageIds, $customerIds);
         }
 
         return $payload;
@@ -80,7 +98,6 @@ class ProductProvider extends DemoDataProvider
     /**
      * @param array<string, mixed> $product
      * @param array{0: string, 1: float} $tax
-     * @param array<string, array<string, mixed>> $manufacturers
      * @param array<string, string> $languageIds
      *
      * @return array<string, mixed>
@@ -89,7 +106,6 @@ class ProductProvider extends DemoDataProvider
         int $index,
         array $product,
         array $tax,
-        array $manufacturers,
         string $storefrontSalesChannel,
         array $languageIds,
         array $customerIds,
@@ -135,7 +151,7 @@ class ProductProvider extends DemoDataProvider
             'releaseDate' => $this->clock->now(),
             'name' => $this->translationHelper->adjustTranslations($product['name']),
             'description' => $this->translationHelper->adjustTranslations($product['description']),
-            'manufacturer' => $manufacturers[$product['manufacturerId']],
+            'manufacturerId' => $product['manufacturerId'],
             'media' => $media,
             'coverId' => $media[0]['id'],
             'categories' => array_map(
@@ -148,6 +164,52 @@ class ProductProvider extends DemoDataProvider
                 'gross' => $gross,
                 'linked' => true,
             ]],
+            // Advanced price: a member price for the demo customer group rule.
+            'prices' => [[
+                'id' => \md5($productId . ':advanced-price:1'),
+                'ruleId' => RuleProvider::CUSTOMER_GROUP_RULE_ID,
+                'quantityStart' => 1,
+                'price' => [[
+                    'currencyId' => Defaults::CURRENCY,
+                    'net' => $this->net($gross * self::MEMBER_DISCOUNT, $taxRate),
+                    'gross' => \round($gross * self::MEMBER_DISCOUNT, 2),
+                    'linked' => true,
+                ]],
+            ]],
+            'crossSellings' => [
+                [
+                    'id' => \md5($productId . ':cross-selling:1'),
+                    'name' => $this->translationHelper->adjustTranslations([
+                        'zh-CN' => '看了又看',
+                        'en-GB' => 'You may also like',
+                    ]),
+                    'position' => 1,
+                    'active' => true,
+                    'type' => 'productStream',
+                    'sortBy' => 'cheapestPrice',
+                    'sortDirection' => 'ASC',
+                    'limit' => 6,
+                    'productStreamId' => ProductStreamProvider::categoryId($product['categories'][0]),
+                ],
+                [
+                    'id' => \md5($productId . ':cross-selling:2'),
+                    'name' => $this->translationHelper->adjustTranslations([
+                        'zh-CN' => '猜你喜欢',
+                        'en-GB' => 'Recommended for you',
+                    ]),
+                    'position' => 2,
+                    'active' => true,
+                    'type' => 'productStream',
+                    'sortBy' => 'name',
+                    'sortDirection' => 'ASC',
+                    'limit' => 6,
+                    'productStreamId' => ProductStreamProvider::specialId(1),
+                ],
+            ],
+            'tags' => \array_map(
+                static fn(int $tagIndex): array => ['id' => TagProvider::tagId($tagIndex)],
+                self::tagIndexesFor($index),
+            ),
             'visibilities' => [
                 [
                     'id' => \md5($productId . ':visibility'),
@@ -190,7 +252,12 @@ class ProductProvider extends DemoDataProvider
         }
 
         $configuratorSettings = array_map(
-            static fn(string $optionId) => ['optionId' => $optionId],
+            static fn(string $optionId) => [
+                // deterministic id: the unique index on the configurator
+                // setting table rejects a second row for the same option
+                'id' => \md5($product['id'] . ':configurator:' . $optionId),
+                'optionId' => $optionId,
+            ],
             $optionIds,
         );
 
@@ -199,6 +266,7 @@ class ProductProvider extends DemoDataProvider
         foreach ($this->combinations($variants) as $combination) {
             ++$number;
             $children[] = [
+                'id' => \md5($product['id'] . ':variant:' . $number),
                 'productNumber' => $product['productNumber'] . '.' . $number,
                 'stock' => (int) $product['stock'],
                 'options' => array_map(static fn(string $optionId) => ['id' => $optionId], $combination),
@@ -235,39 +303,19 @@ class ProductProvider extends DemoDataProvider
     }
 
     /**
-     * @return list<array<string, mixed>>
+     * Three tags per product, rotated deterministically over the demo tags.
+     *
+     * @return list<int>
      */
-    private function getProducts(): array
+    private static function tagIndexesFor(int $productIndex): array
     {
-        /** @var array<string, mixed> $resource */
-        $resource = ResourceLoader::load('products.json');
+        $tagCount = \count(TagProvider::getDemoTagIds());
 
-        /** @var list<array<string, mixed>> $products */
-        $products = $resource['products'];
-
-        return $products;
-    }
-
-    /**
-     * @return array<string, array<string, mixed>>
-     */
-    private function getManufacturersById(): array
-    {
-        /** @var array<string, mixed> $resource */
-        $resource = ResourceLoader::load('manufacturers.json');
-
-        /** @var list<array<string, mixed>> $manufacturers */
-        $manufacturers = $resource['manufacturers'];
-
-        $byId = [];
-        foreach ($manufacturers as $manufacturer) {
-            $byId[$manufacturer['id']] = [
-                'id' => $manufacturer['id'],
-                'name' => $this->translationHelper->adjustTranslations($manufacturer['name']),
-            ];
-        }
-
-        return $byId;
+        return [
+            $productIndex % $tagCount,
+            ($productIndex + 3) % $tagCount,
+            ($productIndex + 7) % $tagCount,
+        ];
     }
 
     /**

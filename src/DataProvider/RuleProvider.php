@@ -21,6 +21,12 @@ class RuleProvider extends DemoDataProvider
      */
     public const CART_AMOUNT_RULE_ID = 'e1378db7808a478f919e0d740d5d6c1a';
 
+    /**
+     * The "all customers of the default customer group" rule, used as the
+     * rule of the demo advanced (member) prices.
+     */
+    public const CUSTOMER_GROUP_RULE_ID = '28caae75a5624f0d985abd0eb32aa160';
+
     private Connection $connection;
 
     public function __construct(Connection $connection)

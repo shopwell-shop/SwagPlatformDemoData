@@ -13,7 +13,11 @@ Demo content currently shipped:
 - **30 products** across the usual Chinese e-commerce categories (apparel, digital, home, food, beauty),
   each with **at least 3 images**, bilingual product names/descriptions (`zh-CN` + `en-GB`)
 - **30 customers** with realistic names, phone numbers, e-mail addresses and Chinese addresses
-- Categories, property groups, cart rules, shipping methods and a demo landing page
+- **30 orders** with line items, delivery and payment state
+- **20 tags** assigned to products and customers
+- **30 dynamic product groups** and **30 promotions**
+- Advanced prices, cross sellings, categories, property groups, cart rules, shipping methods and a
+  demo landing page
 
 This plugin is a Shopwell-maintained fork of
 [`shopware/SwagPlatformDemoData`](https://github.com/shopware/SwagPlatformDemoData). See [NOTICE](NOTICE)
@@ -51,8 +55,8 @@ All demo customers share the password `shopwell123` and can be used to log in on
 ## Demo images
 
 The 91 product and banner images shipped in `src/Resources/media` were downloaded from
-[Pexels](https://www.pexels.com) and may be used free of charge under the
-[Pexels License](https://www.pexels.com/license/). They are demo content only —
+[Unsplash](https://unsplash.com) and may be used free of charge under the
+[Unsplash License](https://unsplash.com/license). They are demo content only —
 replace them before going live.
 
 ## License

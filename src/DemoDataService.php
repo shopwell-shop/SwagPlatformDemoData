@@ -70,21 +70,29 @@ class DemoDataService
     public function delete(Context $context): void
     {
         foreach ($this->getSortedDemoDataProviders('delete') as $dataProvider) {
+            $action = $dataProvider->getDeleteAction();
             $payloadsIds = [];
 
-            foreach ($dataProvider->getPayload() as $entry) {
-                if ($dataProvider->getEntity() === 'category' && isset($entry['children'])) {
+            foreach ($dataProvider->getDeletePayload() as $entry) {
+                if ($action === SyncController::ACTION_DELETE && $dataProvider->getEntity() === 'category' && isset($entry['children'])) {
+                    // Only the demo children are removed, the shop root category stays.
                     foreach ($entry['children'] as $child) {
                         $payloadsIds[] = ['id' => $child['id']];
                     }
-                } else {
-                    $payloadsIds[] = ['id' => $entry['id']];
+
+                    continue;
                 }
+
+                $payloadsIds[] = $action === SyncController::ACTION_DELETE ? ['id' => $entry['id']] : $entry;
+            }
+
+            if ($payloadsIds === []) {
+                continue;
             }
 
             $payload = [
                 [
-                    'action' => 'delete',
+                    'action' => $action,
                     'entity' => $dataProvider->getEntity(),
                     'payload' => $payloadsIds,
                 ],
@@ -105,6 +113,8 @@ class DemoDataService
             } catch (RestrictDeleteViolationException) {
                 // ignore
             }
+
+            $dataProvider->finalizeDelete($context);
         }
     }
 
