@@ -9,3 +9,4 @@ phpstan-report.json
 composer.lock
 junit.xml
 clover.xml
+.workbuddy/
