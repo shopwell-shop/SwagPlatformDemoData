@@ -37,7 +37,7 @@ return static function (ContainerConfigurator $container): void {
         ->args([
             service(Connection::class),
             service(FileSaver::class),
-            '%kernel.project_dir%/public',
+            service('shopwell.filesystem.public'),
         ])
         ->tag('swag.demo_data.data_provider', ['priority' => 1100]);
 

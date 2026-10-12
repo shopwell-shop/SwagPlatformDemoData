@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Swag\PlatformDemoData\DataProvider;
 
 use Doctrine\DBAL\Connection;
+use League\Flysystem\FilesystemOperator;
 use Shopwell\Core\Content\Media\File\FileSaver;
 use Shopwell\Core\Content\Media\File\MediaFile;
 use Shopwell\Core\Framework\Context;
@@ -24,6 +25,8 @@ class MediaProvider extends DemoDataProvider
 
     private Connection $connection;
 
+    private FilesystemOperator $publicFilesystem;
+
     /**
      * Paths of the demo media files inside the public directory, collected
      * while the delete payload is built and removed afterwards.
@@ -32,13 +35,11 @@ class MediaProvider extends DemoDataProvider
      */
     private array $pendingPublicPaths = [];
 
-    private string $publicDir;
-
-    public function __construct(Connection $connection, FileSaver $fileSaver, string $publicDir)
+    public function __construct(Connection $connection, FileSaver $fileSaver, FilesystemOperator $publicFilesystem)
     {
         $this->fileSaver = $fileSaver;
         $this->connection = $connection;
-        $this->publicDir = $publicDir;
+        $this->publicFilesystem = $publicFilesystem;
     }
 
     public function getAction(): string
@@ -156,10 +157,11 @@ class MediaProvider extends DemoDataProvider
     public function finalizeDelete(Context $context): void
     {
         foreach ($this->pendingPublicPaths as $path) {
-            $file = $this->publicDir . '/' . $path;
-
-            if (\is_file($file)) {
-                @\unlink($file);
+            // Goes through the public filesystem instead of touching the disk
+            // directly: the platform forbids raw filesystem writes in plugins
+            // and a remote adapter would not be reachable with unlink() at all.
+            if ($this->publicFilesystem->fileExists($path)) {
+                $this->publicFilesystem->delete($path);
             }
         }
 
