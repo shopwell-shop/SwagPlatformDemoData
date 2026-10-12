@@ -1,0 +1,68 @@
+name: PHP checks
+
+on:
+  pull_request:
+  push:
+    branches:
+      - trunk
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  codestyle_php:
+    name: Codestyle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: shopware/github-actions/cs-fixer@main
+        with:
+          rules: ''
+
+  phpstan:
+    name: PHPStan
+    uses: ./.github/workflows/action-phpstan.yml
+    with:
+      extension_name: ${{ github.event.repository.name }}
+
+  extension_verifier:
+    name: Extension Verifier (lowest)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout SwagPlatformDemoData
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Remove PHPStan config
+        run: rm phpstan.neon.dist
+
+      - name: Allow composer to resolve advisory-affected releases
+        run: composer config policy.advisories.block false
+
+      - name: Run verifier
+        uses: shopware/github-actions/extension-verifier@main
+        with:
+          action: check
+          check-against: lowest
+
+  phpunit:
+    name: PHPUnit
+    strategy:
+      fail-fast: false
+      matrix:
+        shopware-version:
+          - trunk
+          - 6.6.x
+    uses: ./.github/workflows/action-phpunit.yml
+    with:
+      extension_name: ${{ github.event.repository.name }}
+      platform_branch: ${{ matrix.shopware-version }}
+      coverage: ${{ matrix.shopware-version == 'trunk' }}
+    secrets:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  smoke_test:
+    name: Smoke test
+    uses: ./.github/workflows/action-smoke-test.yml
+    with:
+      extension_name: ${{ github.event.repository.name }}

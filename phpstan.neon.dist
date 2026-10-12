@@ -1,0 +1,21 @@
+includes:
+    - %ShopwellRoot%/src/Core/DevOps/StaticAnalyze/PHPStan/common.neon
+
+parameters:
+    tmpDir: var/cache/phpstan
+
+    paths:
+        - src
+        - tests
+
+    excludePaths:
+        - src/Resources
+
+    symfony:
+        constantHassers: false
+        containerXmlPath: '../../..%ShopwellHashedCacheDir%/%ShopwellKernelClass%DevDebugContainer.xml'
+        consoleApplicationLoader: %ShopwellRoot%/src/Core/DevOps/StaticAnalyze/console-application.php
+
+    type_perfect:
+        narrow_return: true
+        narrow_param: true

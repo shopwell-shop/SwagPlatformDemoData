@@ -1,0 +1,168 @@
+{
+  "categories": [
+    {
+      "id": "1846d4b8fa74c3841269208b3f8d2af9",
+      "name": {
+        "zh-CN": "服饰鞋包",
+        "en-GB": "Apparel & Shoes"
+      },
+      "children": [
+        {
+          "id": "a3a913106dbb3dc6f0f7206c815ad7e8",
+          "name": {
+            "zh-CN": "男装",
+            "en-GB": "Men"
+          }
+        },
+        {
+          "id": "44870318fe02f407631cbf8d5a84be55",
+          "name": {
+            "zh-CN": "女装",
+            "en-GB": "Women"
+          }
+        },
+        {
+          "id": "7ade6a400b852ab9e66b7d49f4e27b5d",
+          "name": {
+            "zh-CN": "鞋靴",
+            "en-GB": "Shoes"
+          }
+        }
+      ]
+    },
+    {
+      "id": "c911777bdb00d61011b9e1d3e00d1a61",
+      "name": {
+        "zh-CN": "数码家电",
+        "en-GB": "Electronics"
+      },
+      "children": [
+        {
+          "id": "7afa7c9956e3fcf843b54c73cac12703",
+          "name": {
+            "zh-CN": "手机通讯",
+            "en-GB": "Phones"
+          }
+        },
+        {
+          "id": "7f873ec1d286bf146aa5547e776ab051",
+          "name": {
+            "zh-CN": "电脑办公",
+            "en-GB": "Computers & Office"
+          }
+        },
+        {
+          "id": "9fb4189405e0543902e1109ef00a2e93",
+          "name": {
+            "zh-CN": "智能穿戴",
+            "en-GB": "Wearables"
+          }
+        },
+        {
+          "id": "c87dd89e5eb0aa3183894ef7dc755384",
+          "name": {
+            "zh-CN": "影音娱乐",
+            "en-GB": "Audio & Video"
+          }
+        }
+      ]
+    },
+    {
+      "id": "77390ef31e4271d5f2e97c3bf31cfefc",
+      "name": {
+        "zh-CN": "家居生活",
+        "en-GB": "Home & Living"
+      },
+      "children": [
+        {
+          "id": "6f315714073b308c1559befb33d9888d",
+          "name": {
+            "zh-CN": "厨房餐具",
+            "en-GB": "Kitchen & Tableware"
+          }
+        },
+        {
+          "id": "282bb5887d066b602eba7628215521e2",
+          "name": {
+            "zh-CN": "家饰家纺",
+            "en-GB": "Home Decor & Textiles"
+          }
+        },
+        {
+          "id": "65ed34f832aa1c1f52ab74763120850c",
+          "name": {
+            "zh-CN": "生活电器",
+            "en-GB": "Small Appliances"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2d866d2f3fcdd51d5e3b12318a427769",
+      "name": {
+        "zh-CN": "食品生鲜",
+        "en-GB": "Food & Grocery"
+      },
+      "children": [
+        {
+          "id": "dbadeb1d1b670e0f5b7e4215efa65001",
+          "name": {
+            "zh-CN": "咖啡茶饮",
+            "en-GB": "Coffee & Tea"
+          }
+        },
+        {
+          "id": "c1e5ea31c3301f2948993dad92e249cb",
+          "name": {
+            "zh-CN": "休闲零食",
+            "en-GB": "Snacks"
+          }
+        },
+        {
+          "id": "c29d3f88caefff7674a44eaa29d64772",
+          "name": {
+            "zh-CN": "酒水饮料",
+            "en-GB": "Wine & Drinks"
+          }
+        }
+      ]
+    },
+    {
+      "id": "2af8f2158c393b2a3a9e2017c4e1576a",
+      "name": {
+        "zh-CN": "美妆个护",
+        "en-GB": "Beauty & Personal Care"
+      },
+      "children": [
+        {
+          "id": "fb71b373cccf2eab71e73496bab1e08e",
+          "name": {
+            "zh-CN": "护肤",
+            "en-GB": "Skincare"
+          }
+        },
+        {
+          "id": "ae37a5dcff1ab874549ff18fe256248e",
+          "name": {
+            "zh-CN": "彩妆",
+            "en-GB": "Makeup"
+          }
+        },
+        {
+          "id": "97779c81125ce67f44f80044d02dc57d",
+          "name": {
+            "zh-CN": "香水香氛",
+            "en-GB": "Fragrance"
+          }
+        },
+        {
+          "id": "a84fd04962a35c89446fb235307274af",
+          "name": {
+            "zh-CN": "洗护",
+            "en-GB": "Bath & Body"
+          }
+        }
+      ]
+    }
+  ]
+}

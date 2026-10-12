@@ -1,0 +1,1171 @@
+{
+  "products": [
+    {
+      "id": "39655c1c70b6065f75e1a64dcb5687c4",
+      "productNumber": "SW-DEMO-001",
+      "ean": "6954257476362",
+      "active": true,
+      "name": {
+        "zh-CN": "男士纯棉圆领短袖T恤",
+        "en-GB": "Men's Cotton Crew Neck T-Shirt"
+      },
+      "description": {
+        "zh-CN": "精选新疆长绒棉，克重 220g，面料厚实挺括、透气亲肤。经典圆领版型，简约百搭，日常通勤与休闲场合皆宜。机洗不易变形，久穿不易起球。",
+        "en-GB": "Made from premium long-staple cotton with a 220 gsm weight: substantial, breathable and soft against the skin. A classic crew-neck cut that works for the office and the weekend alike. Machine washable and resistant to pilling."
+      },
+      "grossPrice": 59.0,
+      "purchasePrice": 22.0,
+      "stock": 280,
+      "weight": 0.18,
+      "width": 380.0,
+      "height": 20.0,
+      "length": 250.0,
+      "shippingFree": false,
+      "markAsTopseller": true,
+      "manufacturerId": "a2d6344ace798db4bc1fc876deb7260c",
+      "categories": [
+        "a3a913106dbb3dc6f0f7206c815ad7e8",
+        "1846d4b8fa74c3841269208b3f8d2af9"
+      ],
+      "media": [
+        "667b426a8c5e5240550fe48a6154218b",
+        "7164c79fabfc752ede2de3adbb60008f",
+        "40ae614928b056b1d39afe81b322b6ea"
+      ],
+      "properties": [
+        "bb6befecc1354152ea31879430e45042",
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "a79d505447231fdc5e9b19899478f057",
+        "4cdc3fa4dea83da5edbbc4ca888999cd",
+        "d8e59f0c6b16a4000f2fb07118ac146d",
+        "12d312143e5ed38dd45afd0a7d6a9881",
+        "b9b8bc1742a02d4a0bea3dd5a78bbd86"
+      ],
+      "variants": [
+        {
+          "group": "colour",
+          "options": [
+            "bb6befecc1354152ea31879430e45042",
+            "3c39ce826a9811ed3e03b37a871db33f"
+          ]
+        },
+        {
+          "group": "size",
+          "options": [
+            "a79d505447231fdc5e9b19899478f057",
+            "4cdc3fa4dea83da5edbbc4ca888999cd",
+            "d8e59f0c6b16a4000f2fb07118ac146d"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "42b913c22e7e223d7b0860728e367911",
+      "productNumber": "SW-DEMO-002",
+      "ean": "6966389342362",
+      "active": true,
+      "name": {
+        "zh-CN": "女士法式碎花连衣裙",
+        "en-GB": "Women's French Floral Dress"
+      },
+      "description": {
+        "zh-CN": "垂坠感雪纺面料，剪裁修身不紧绷，腰线设计修饰身材比例。浪漫碎花印花，逛街约会度假都能穿，一条裙子搞定春夏衣橱。",
+        "en-GB": "Flowing chiffon with a flattering, non-restrictive cut and a waist seam that shapes the silhouette. A romantic floral print that suits city strolls, dates and holidays — one dress for the whole spring/summer wardrobe."
+      },
+      "grossPrice": 199.0,
+      "purchasePrice": 68.0,
+      "stock": 150,
+      "weight": 0.32,
+      "width": 300.0,
+      "height": 30.0,
+      "length": 250.0,
+      "shippingFree": true,
+      "markAsTopseller": true,
+      "manufacturerId": "a2d6344ace798db4bc1fc876deb7260c",
+      "categories": [
+        "44870318fe02f407631cbf8d5a84be55",
+        "1846d4b8fa74c3841269208b3f8d2af9"
+      ],
+      "media": [
+        "afd3fe3aa8881d89b865a2c6c19eea91",
+        "205bb204c8e0c4b9edeb8d8b01bce0a4",
+        "6c61558576cc911f91c939dcb1775ca3"
+      ],
+      "properties": [
+        "19ff65bda05bd9921aeb2b02814a2109",
+        "bf123d949247842d41d6ae81c5aaeb12",
+        "a79d505447231fdc5e9b19899478f057",
+        "4cdc3fa4dea83da5edbbc4ca888999cd",
+        "adc3436ecc216988ee456ecd1cd6e1d6",
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "dcc50f4a04a6cb9f9749546fda22dd6b",
+      "productNumber": "SW-DEMO-003",
+      "ean": "6912518882044",
+      "active": true,
+      "name": {
+        "zh-CN": "男士修身直筒牛仔裤",
+        "en-GB": "Men's Slim Straight Jeans"
+      },
+      "description": {
+        "zh-CN": "12 安士全棉牛仔布，微弹面料活动自如。修身直筒版型，显瘦不勒腿，五袋经典设计，耐穿耐磨。",
+        "en-GB": "12 oz all-cotton denim with a touch of stretch for easy movement. Slim-straight fit that looks sharp without pinching, finished with the classic five-pocket design."
+      },
+      "grossPrice": 169.0,
+      "purchasePrice": 59.0,
+      "stock": 180,
+      "weight": 0.75,
+      "width": 320.0,
+      "height": 60.0,
+      "length": 280.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "059428b0fb0375eff3132879bf1f6197",
+      "categories": [
+        "a3a913106dbb3dc6f0f7206c815ad7e8",
+        "1846d4b8fa74c3841269208b3f8d2af9"
+      ],
+      "media": [
+        "93d853b19c4adcf79a0be242ef4256d6",
+        "b19d708c6e2e7b318f5e116928a80966",
+        "c285525140fba4ef57b17a1f9f2f74b5"
+      ],
+      "properties": [
+        "19ff65bda05bd9921aeb2b02814a2109",
+        "a79d505447231fdc5e9b19899478f057",
+        "4cdc3fa4dea83da5edbbc4ca888999cd",
+        "d8e59f0c6b16a4000f2fb07118ac146d",
+        "12d312143e5ed38dd45afd0a7d6a9881",
+        "b9b8bc1742a02d4a0bea3dd5a78bbd86"
+      ]
+    },
+    {
+      "id": "d6669e79edc1a4f1f35c4c7b677c426d",
+      "productNumber": "SW-DEMO-004",
+      "ean": "6936062071290",
+      "active": true,
+      "name": {
+        "zh-CN": "女士宽松针织开衫",
+        "en-GB": "Women's Relaxed Knit Cardigan"
+      },
+      "description": {
+        "zh-CN": "柔软腈纶混纺纱线，织纹细腻、上身轻盈。落肩宽松版型，春秋季节单穿或内搭都好看。",
+        "en-GB": "Soft acrylic-blend yarn with a fine, even knit that feels light on. Dropped shoulders and a relaxed cut — easy to wear on its own or layered in spring and autumn."
+      },
+      "grossPrice": 149.0,
+      "purchasePrice": 52.0,
+      "stock": 120,
+      "weight": 0.45,
+      "width": 320.0,
+      "height": 40.0,
+      "length": 260.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "a2d6344ace798db4bc1fc876deb7260c",
+      "categories": [
+        "44870318fe02f407631cbf8d5a84be55",
+        "1846d4b8fa74c3841269208b3f8d2af9"
+      ],
+      "media": [
+        "2165115f28bc32c561d996e5cda15fcf",
+        "408cca2a3a2df8f0b190056e3f667b16",
+        "5853a584bf0f8cd464c4a2ee372cb1f5"
+      ],
+      "properties": [
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "a79d505447231fdc5e9b19899478f057",
+        "4cdc3fa4dea83da5edbbc4ca888999cd",
+        "adc3436ecc216988ee456ecd1cd6e1d6",
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "fedd748112b498d5725a514300b09c31",
+      "productNumber": "SW-DEMO-005",
+      "ean": "6934244732089",
+      "active": true,
+      "name": {
+        "zh-CN": "男士速干运动短裤",
+        "en-GB": "Men's Quick-Dry Sport Shorts"
+      },
+      "description": {
+        "zh-CN": "轻量速干面料，吸汗排湿，运动后不易黏身。内置抽绳松紧腰头，侧边反光条提升夜跑安全性。",
+        "en-GB": "Lightweight quick-dry fabric that wicks sweat and stays comfortable after workouts. Elastic waist with an inner drawcord, plus reflective side piping for safer night runs."
+      },
+      "grossPrice": 79.0,
+      "purchasePrice": 26.0,
+      "stock": 300,
+      "weight": 0.16,
+      "width": 300.0,
+      "height": 25.0,
+      "length": 220.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "a2d6344ace798db4bc1fc876deb7260c",
+      "categories": [
+        "a3a913106dbb3dc6f0f7206c815ad7e8",
+        "1846d4b8fa74c3841269208b3f8d2af9"
+      ],
+      "media": [
+        "5e58e94597474f9aa9170b7e5185478c",
+        "d807bcafa56f1f4907221ced40241e6b",
+        "5e9ffa1da240dce6da967a4a0271dad6"
+      ],
+      "properties": [
+        "1ed5566cddafcae086f6c28c579f8210",
+        "a79d505447231fdc5e9b19899478f057",
+        "4cdc3fa4dea83da5edbbc4ca888999cd",
+        "d8e59f0c6b16a4000f2fb07118ac146d",
+        "adc3436ecc216988ee456ecd1cd6e1d6",
+        "b9b8bc1742a02d4a0bea3dd5a78bbd86"
+      ]
+    },
+    {
+      "id": "defd7339aa91e99f3ba6adf713cc15d6",
+      "productNumber": "SW-DEMO-006",
+      "ean": "6965522015622",
+      "active": true,
+      "name": {
+        "zh-CN": "经典低帮帆布鞋",
+        "en-GB": "Classic Low-Top Canvas Sneakers"
+      },
+      "description": {
+        "zh-CN": "加厚帆布鞋面，硫化橡胶大底防滑耐磨。简约低帮设计，男女同款，日常出行百搭之选。",
+        "en-GB": "Thick canvas upper on a vulcanised rubber sole for grip and durability. A minimalist low-top that suits everyone — an easy everyday choice."
+      },
+      "grossPrice": 129.0,
+      "purchasePrice": 45.0,
+      "stock": 220,
+      "weight": 0.65,
+      "width": 320.0,
+      "height": 120.0,
+      "length": 200.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "059428b0fb0375eff3132879bf1f6197",
+      "categories": [
+        "7ade6a400b852ab9e66b7d49f4e27b5d",
+        "1846d4b8fa74c3841269208b3f8d2af9"
+      ],
+      "media": [
+        "ff8fa92e4300e5d26c728c31bcf1b142",
+        "6ae04ae3fcf3859d8003555086d7cb7e",
+        "cdf333e6a776d31638f34d40b4801990"
+      ],
+      "properties": [
+        "19ff65bda05bd9921aeb2b02814a2109",
+        "e8819557e3c1bee0b60bbc2771e56dc3",
+        "204bd47714572e84a72a4d002889429b",
+        "6bdc2fbd0d9ca7515a3630ff8be5ab8f",
+        "eb550c1def5373bcff351739dd831db8",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ],
+      "variants": [
+        {
+          "group": "shoe-size",
+          "options": [
+            "e8819557e3c1bee0b60bbc2771e56dc3",
+            "204bd47714572e84a72a4d002889429b",
+            "6bdc2fbd0d9ca7515a3630ff8be5ab8f",
+            "eb550c1def5373bcff351739dd831db8"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "c8f80cec54f433b5b531fe5b4ef48d3f",
+      "productNumber": "SW-DEMO-007",
+      "ean": "6995779463674",
+      "active": true,
+      "name": {
+        "zh-CN": "真无线蓝牙耳机",
+        "en-GB": "True Wireless Earbuds"
+      },
+      "description": {
+        "zh-CN": "蓝牙 5.3 低延迟连接，单次续航 8 小时，配合充电仓可达 32 小时。入耳检测、通话降噪，通勤运动都稳。",
+        "en-GB": "Bluetooth 5.3 with low-latency pairing, 8 hours per charge and 32 hours with the case. In-ear detection and clear call noise cancelling — reliable for commuting and workouts."
+      },
+      "grossPrice": 299.0,
+      "purchasePrice": 128.0,
+      "stock": 350,
+      "weight": 0.09,
+      "width": 110.0,
+      "height": 45.0,
+      "length": 100.0,
+      "shippingFree": true,
+      "markAsTopseller": true,
+      "manufacturerId": "edcca18492f1f520e088c79fd04859f4",
+      "categories": [
+        "c87dd89e5eb0aa3183894ef7dc755384",
+        "c911777bdb00d61011b9e1d3e00d1a61"
+      ],
+      "media": [
+        "1bf44a30704f13ec3e52e40bf59a8f7b",
+        "3ae796a67928f3d3cda98afcdef9e7f3",
+        "8bfd21285f80631e2bbafb5fd6e10772"
+      ],
+      "properties": [
+        "bb6befecc1354152ea31879430e45042",
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "d1b70e1aa90cd969762b59042e2fad9b",
+      "productNumber": "SW-DEMO-008",
+      "ean": "6928807822831",
+      "active": true,
+      "name": {
+        "zh-CN": "5G 全网通智能手机",
+        "en-GB": "5G Smartphone"
+      },
+      "description": {
+        "zh-CN": "6.7 英寸 120Hz OLED 直屏，5000mAh 大电池配合 67W 快充。6400 万像素三摄，双卡双待，全网通 5G。",
+        "en-GB": "A 6.7-inch 120 Hz OLED display, a 5000 mAh battery and 67 W fast charging. 64 MP triple camera, dual SIM and full-band 5G."
+      },
+      "grossPrice": 2999.0,
+      "purchasePrice": 2280.0,
+      "stock": 90,
+      "weight": 0.21,
+      "width": 160.0,
+      "height": 8.0,
+      "length": 75.0,
+      "shippingFree": true,
+      "markAsTopseller": true,
+      "manufacturerId": "9337b8bc50878f347e14d8add5b8b650",
+      "categories": [
+        "7afa7c9956e3fcf843b54c73cac12703",
+        "c911777bdb00d61011b9e1d3e00d1a61"
+      ],
+      "media": [
+        "7e67c368632656df1f628f82fce135c6",
+        "9e5c3bc0febce9cb17b4ad35093e2202",
+        "d4c0d62ad8e21987044705146c8fa749"
+      ],
+      "properties": [
+        "bb6befecc1354152ea31879430e45042",
+        "19ff65bda05bd9921aeb2b02814a2109",
+        "8386aeae628c5b2ea43c31e26d9af805",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "c49b32fedf20f1c595eed683fe1aecc3",
+      "productNumber": "SW-DEMO-009",
+      "ean": "6939782390273",
+      "active": true,
+      "name": {
+        "zh-CN": "轻薄笔记本电脑",
+        "en-GB": "Ultrabook Laptop"
+      },
+      "description": {
+        "zh-CN": "14 英寸 2.8K 低蓝光屏幕，金属机身仅重 1.3kg。16GB 内存 + 1TB 固态硬盘，日常办公与轻度创作流畅应对。",
+        "en-GB": "A 14-inch 2.8K low-blue-light panel in a 1.3 kg metal chassis. 16 GB of memory and a 1 TB SSD keep everyday work and light creative tasks smooth."
+      },
+      "grossPrice": 5999.0,
+      "purchasePrice": 4650.0,
+      "stock": 45,
+      "weight": 1.3,
+      "width": 320.0,
+      "height": 15.0,
+      "length": 220.0,
+      "shippingFree": true,
+      "markAsTopseller": false,
+      "manufacturerId": "9337b8bc50878f347e14d8add5b8b650",
+      "categories": [
+        "7f873ec1d286bf146aa5547e776ab051",
+        "c911777bdb00d61011b9e1d3e00d1a61"
+      ],
+      "media": [
+        "10431feffe349ff5505a5eb228b7fb5b",
+        "fc0ac48cb490313e8f2020b313e8ca55",
+        "020603b4c8ebacdd3fcf054564b3cbb3"
+      ],
+      "properties": [
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "15fe1d46814ed6d09f14db88d15cf6f1",
+      "productNumber": "SW-DEMO-010",
+      "ean": "6998473073080",
+      "active": true,
+      "name": {
+        "zh-CN": "智能运动手表",
+        "en-GB": "Smart Sports Watch"
+      },
+      "description": {
+        "zh-CN": "1.85 英寸高清大屏，支持心率、血氧、睡眠监测与 100+ 运动模式。14 天超长续航，50 米防水。",
+        "en-GB": "A 1.85-inch high-resolution display with heart-rate, blood-oxygen and sleep tracking plus 100+ workout modes. Up to 14 days of battery and 50 m water resistance."
+      },
+      "grossPrice": 899.0,
+      "purchasePrice": 420.0,
+      "stock": 160,
+      "weight": 0.05,
+      "width": 60.0,
+      "height": 12.0,
+      "length": 45.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "9337b8bc50878f347e14d8add5b8b650",
+      "categories": [
+        "9fb4189405e0543902e1109ef00a2e93",
+        "c911777bdb00d61011b9e1d3e00d1a61"
+      ],
+      "media": [
+        "86b7951de34af0a43e14d0c19e3450d8",
+        "e8f31f72a17c7c8043c15f636b1619de",
+        "ed1725c597b72160960cf693b765eb4e"
+      ],
+      "properties": [
+        "bb6befecc1354152ea31879430e45042",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "57ff2544a68f68ae5204bdc1ccf09ea0",
+      "productNumber": "SW-DEMO-011",
+      "ean": "6912133100611",
+      "active": true,
+      "name": {
+        "zh-CN": "便携蓝牙音箱",
+        "en-GB": "Portable Bluetooth Speaker"
+      },
+      "description": {
+        "zh-CN": "双单元立体声，低音澎湃。IPX7 级防水，户外露营派对都能用，续航 20 小时。",
+        "en-GB": "Dual drivers with punchy bass, IPX7 water resistance and 20 hours of playtime — ready for camping trips and parties."
+      },
+      "grossPrice": 199.0,
+      "purchasePrice": 86.0,
+      "stock": 210,
+      "weight": 0.55,
+      "width": 180.0,
+      "height": 70.0,
+      "length": 70.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "edcca18492f1f520e088c79fd04859f4",
+      "categories": [
+        "c87dd89e5eb0aa3183894ef7dc755384",
+        "c911777bdb00d61011b9e1d3e00d1a61"
+      ],
+      "media": [
+        "75a73f54774c1639d0577b305538cdc3",
+        "cdebc7c3632f06624eb5772c8b899822",
+        "cdd439c134817620e52d002c46fae4d4"
+      ],
+      "properties": [
+        "bb6befecc1354152ea31879430e45042",
+        "7471f6ec8e85e3f142f50797611172e2",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "8a2607be4b540b5f933a52edc3e7bf8a",
+      "productNumber": "SW-DEMO-012",
+      "ean": "6956500856836",
+      "active": true,
+      "name": {
+        "zh-CN": "87 键机械键盘",
+        "en-GB": "87-Key Mechanical Keyboard"
+      },
+      "description": {
+        "zh-CN": "Gasket 结构 + 热插拔轴座，敲击手感干净利落。PBT 键帽不打油，支持有线/蓝牙/2.4G 三模连接。",
+        "en-GB": "A gasket-mounted plate with hot-swappable switches for a crisp, clean typing feel. PBT keycaps resist shine; connects by cable, Bluetooth or 2.4 G."
+      },
+      "grossPrice": 399.0,
+      "purchasePrice": 175.0,
+      "stock": 140,
+      "weight": 0.95,
+      "width": 360.0,
+      "height": 40.0,
+      "length": 140.0,
+      "shippingFree": false,
+      "markAsTopseller": true,
+      "manufacturerId": "edcca18492f1f520e088c79fd04859f4",
+      "categories": [
+        "7f873ec1d286bf146aa5547e776ab051",
+        "c911777bdb00d61011b9e1d3e00d1a61"
+      ],
+      "media": [
+        "c14fdc4e48080c01580883a5682a66fe",
+        "5bb0c896ece0b981afc3cf2890d3c240",
+        "6349c7574e02e0bad5c1756308b10152"
+      ],
+      "properties": [
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "99866080a7f4b55cdd19ed184f21b281",
+      "productNumber": "SW-DEMO-013",
+      "ean": "6916876543792",
+      "active": true,
+      "name": {
+        "zh-CN": "手工釉下彩陶瓷马克杯",
+        "en-GB": "Handmade Ceramic Mug"
+      },
+      "description": {
+        "zh-CN": "高温烧制釉下彩工艺，图案不易脱落。400ml 大容量，杯壁厚实保温，微波炉与洗碗机均可使用。",
+        "en-GB": "Underglaze decoration fired at high temperature so the pattern stays put. A generous 400 ml with thick walls that hold the heat; microwave and dishwasher safe."
+      },
+      "grossPrice": 39.0,
+      "purchasePrice": 14.0,
+      "stock": 400,
+      "weight": 0.4,
+      "width": 110.0,
+      "height": 95.0,
+      "length": 85.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "c0a6b3d03459a540808b74af2fa3d7c7",
+      "categories": [
+        "6f315714073b308c1559befb33d9888d",
+        "77390ef31e4271d5f2e97c3bf31cfefc"
+      ],
+      "media": [
+        "7e63a5a1efebdb644b5c05f635a5a061",
+        "882a3d0c5d363cb0471e77acca5efb85",
+        "3926cf1b91e5af3ccfbc8cd29ee2bb78"
+      ],
+      "properties": [
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "eae040d1d6ba41d4fdf46950bae505f3",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "5099b305bb18a38fef9ba90f62d4b5a7",
+      "productNumber": "SW-DEMO-014",
+      "ean": "6981870341873",
+      "active": true,
+      "name": {
+        "zh-CN": "大豆蜡香薰蜡烛",
+        "en-GB": "Soy Wax Scented Candle"
+      },
+      "description": {
+        "zh-CN": "天然大豆蜡与植物精油调配，燃烧无黑烟。木质调香型，点燃后弥漫客厅与卧室，助眠放松。",
+        "en-GB": "Natural soy wax blended with plant essential oils for a clean, smokeless burn. A woody fragrance that fills the living room or bedroom and helps you unwind."
+      },
+      "grossPrice": 69.0,
+      "purchasePrice": 24.0,
+      "stock": 260,
+      "weight": 0.3,
+      "width": 90.0,
+      "height": 95.0,
+      "length": 90.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "c0a6b3d03459a540808b74af2fa3d7c7",
+      "categories": [
+        "282bb5887d066b602eba7628215521e2",
+        "77390ef31e4271d5f2e97c3bf31cfefc"
+      ],
+      "media": [
+        "34a098227b9dc92d8475fc3b8825256e",
+        "28e66d36b0dbc7f4bc9d0170f85ed450",
+        "f4c5c70df0d543f6601aaf114ef49c76"
+      ],
+      "properties": [
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "43c0258a8f4ae55d2000690f03e8c814",
+      "productNumber": "SW-DEMO-015",
+      "ean": "6914094031497",
+      "active": true,
+      "name": {
+        "zh-CN": "亚麻抱枕靠垫",
+        "en-GB": "Linen Cushion"
+      },
+      "description": {
+        "zh-CN": "天然亚麻面料透气亲肤，内芯为高回弹 PP 棉。45×45cm 标准尺寸，沙发床头都能用，含隐形拉链可拆洗。",
+        "en-GB": "Breathable natural linen with a resilient PP-cotton insert. Standard 45×45 cm for sofas and beds, with a hidden zip and removable, washable cover."
+      },
+      "grossPrice": 59.0,
+      "purchasePrice": 20.0,
+      "stock": 320,
+      "weight": 0.55,
+      "width": 450.0,
+      "height": 450.0,
+      "length": 120.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "c0a6b3d03459a540808b74af2fa3d7c7",
+      "categories": [
+        "282bb5887d066b602eba7628215521e2",
+        "77390ef31e4271d5f2e97c3bf31cfefc"
+      ],
+      "media": [
+        "c3f360f3173eab0ece9de31f1d5f048d",
+        "1c47728800d6144261cb70ef285a18ef",
+        "60af7afa908943ea2b713dc88513ae16"
+      ],
+      "properties": [
+        "7471f6ec8e85e3f142f50797611172e2",
+        "4cd9051f648f6bb347f6dea7588bf385",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "3a9bb8682899fcacd67249f3a6c53a68",
+      "productNumber": "SW-DEMO-016",
+      "ean": "6955655234462",
+      "active": true,
+      "name": {
+        "zh-CN": "虎皮兰观叶绿植盆栽",
+        "en-GB": "Snake Plant in Pot"
+      },
+      "description": {
+        "zh-CN": "耐阴耐旱好养活，是新手也能养好的室内绿植。含陶瓷花盆与缓释肥，到手即可摆放，净化空气更省心。",
+        "en-GB": "Tolerant of low light and infrequent watering — an easy houseplant for beginners. Ships with a ceramic pot and slow-release fertiliser, ready to place and happy to clean your air."
+      },
+      "grossPrice": 49.0,
+      "purchasePrice": 18.0,
+      "stock": 180,
+      "weight": 1.2,
+      "width": 200.0,
+      "height": 350.0,
+      "length": 200.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "c0a6b3d03459a540808b74af2fa3d7c7",
+      "categories": [
+        "282bb5887d066b602eba7628215521e2",
+        "77390ef31e4271d5f2e97c3bf31cfefc"
+      ],
+      "media": [
+        "aba14596cce947b1cc1255cdf3181441",
+        "2415065dc33763945a4a17325e4b69c8",
+        "43436340f7001e08e4b63d3a5f0b7b16"
+      ],
+      "properties": [
+        "eae040d1d6ba41d4fdf46950bae505f3",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "61780b013a97fda778ec12b212ae100c",
+      "productNumber": "SW-DEMO-017",
+      "ean": "6971261660612",
+      "active": true,
+      "name": {
+        "zh-CN": "316 不锈钢保温杯",
+        "en-GB": "316 Stainless Steel Thermos Bottle"
+      },
+      "description": {
+        "zh-CN": "316 医用级不锈钢内胆，真空锁温 12 小时。一键弹盖设计，单手可开，通勤与户外都适用。",
+        "en-GB": "A 316 medical-grade stainless steel liner keeps drinks hot for up to 12 hours. One-touch flip lid you can open with one hand — good for commutes and the outdoors."
+      },
+      "grossPrice": 99.0,
+      "purchasePrice": 38.0,
+      "stock": 380,
+      "weight": 0.35,
+      "width": 75.0,
+      "height": 250.0,
+      "length": 75.0,
+      "shippingFree": false,
+      "markAsTopseller": true,
+      "manufacturerId": "a333508b78c816cd3d385c9a9ffd2fe9",
+      "categories": [
+        "6f315714073b308c1559befb33d9888d",
+        "77390ef31e4271d5f2e97c3bf31cfefc"
+      ],
+      "media": [
+        "94b8b77282ec9a53bcdfd5ef5a74b752",
+        "9945d8aca884aff3eb92a6d14ed4ffaa",
+        "f3839149e1062c7a7de2105dc84ff817"
+      ],
+      "properties": [
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "8386aeae628c5b2ea43c31e26d9af805",
+        "e801a5320b9df2595c538f07753fc122",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "3cda7395bc5c3b7ef150dd9b10707e7d",
+      "productNumber": "SW-DEMO-018",
+      "ean": "6956013957251",
+      "active": true,
+      "name": {
+        "zh-CN": "极简 LED 护眼台灯",
+        "en-GB": "Minimalist LED Desk Lamp"
+      },
+      "description": {
+        "zh-CN": "国 AA 级照度，无可视频闪。三档色温无极调光，铝合金灯臂任意角度悬停，学习办公两相宜。",
+        "en-GB": "National AA-grade illuminance with no perceptible flicker. Stepless dimming across three colour temperatures on an aluminium arm that holds any angle."
+      },
+      "grossPrice": 159.0,
+      "purchasePrice": 64.0,
+      "stock": 170,
+      "weight": 0.9,
+      "width": 420.0,
+      "height": 480.0,
+      "length": 150.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "c0a6b3d03459a540808b74af2fa3d7c7",
+      "categories": [
+        "65ed34f832aa1c1f52ab74763120850c",
+        "77390ef31e4271d5f2e97c3bf31cfefc"
+      ],
+      "media": [
+        "78618c19603d6b9220bbfffac8c3c5b3",
+        "2e9a8c13a064487e5a0553703238506e",
+        "2221c0515809359a342f9fa25ce2722c"
+      ],
+      "properties": [
+        "3c39ce826a9811ed3e03b37a871db33f",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "c4371dfc6da61e04c8a96e01958fddc6",
+      "productNumber": "SW-DEMO-019",
+      "ean": "6992317459468",
+      "active": true,
+      "name": {
+        "zh-CN": "中度烘焙精品咖啡豆",
+        "en-GB": "Medium Roast Specialty Coffee Beans"
+      },
+      "description": {
+        "zh-CN": "云南保山高海拔日晒处理，中度烘焙突出坚果与焦糖风味。250g 单向阀包装，现磨现萃香气更足。",
+        "en-GB": "Sun-dried, high-altitude beans from Baoshan, Yunnan, roasted medium to bring out nutty and caramel notes. 250 g in a one-way valve bag so every grind stays fragrant."
+      },
+      "grossPrice": 88.0,
+      "purchasePrice": 36.0,
+      "stock": 240,
+      "weight": 0.28,
+      "width": 120.0,
+      "height": 220.0,
+      "length": 60.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "8c03f89bece14448fa675fb9d465976c",
+      "categories": [
+        "dbadeb1d1b670e0f5b7e4215efa65001",
+        "2d866d2f3fcdd51d5e3b12318a427769"
+      ],
+      "media": [
+        "c7d9c30661d11c0ba8f46de1cd2d2de8",
+        "aaef4a7ca4e0717840dfad834bf1878d",
+        "2ffa1583694bfc94261bf2193deeaf24"
+      ],
+      "properties": [
+        "bdec98d4cc5b90f8bd65be47c9e21262",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "a4f03a78ac06c667639c6e8fd2b21fe4",
+      "productNumber": "SW-DEMO-020",
+      "ean": "6959043029152",
+      "active": true,
+      "name": {
+        "zh-CN": "85% 黑巧克力礼盒",
+        "en-GB": "85% Dark Chocolate Gift Box"
+      },
+      "description": {
+        "zh-CN": "85% 可可含量，低糖不腻，入口丝绒般顺滑。16 粒独立包装礼盒，自吃送礼都合适。",
+        "en-GB": "85% cocoa, low in sugar and never cloying, with a velvet-smooth melt. Sixteen individually wrapped pieces in a gift box — a treat for yourself or someone else."
+      },
+      "grossPrice": 128.0,
+      "purchasePrice": 52.0,
+      "stock": 200,
+      "weight": 0.3,
+      "width": 220.0,
+      "height": 50.0,
+      "length": 160.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "8c03f89bece14448fa675fb9d465976c",
+      "categories": [
+        "c1e5ea31c3301f2948993dad92e249cb",
+        "2d866d2f3fcdd51d5e3b12318a427769"
+      ],
+      "media": [
+        "71e76bd0184e299e815b1f08de7821f4",
+        "f9b6f3a104fc94d7c0e3387c515f8551",
+        "bdc451778774040286146dc97a8252b4"
+      ],
+      "properties": [
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "917c7f06ccc1f83c7cca3159c4c5425f",
+      "productNumber": "SW-DEMO-021",
+      "ean": "6958759232924",
+      "active": true,
+      "name": {
+        "zh-CN": "每日坚果混合装",
+        "en-GB": "Daily Mixed Nuts Pack"
+      },
+      "description": {
+        "zh-CN": "巴旦木、腰果、核桃、蔓越莓等 8 种原料，独立小包锁鲜。30 天量装，办公室下午茶好伴侣。",
+        "en-GB": "Eight ingredients — almonds, cashews, walnuts, cranberries and more — in single-serve packs that lock in freshness. A 30-day supply, perfect for the office afternoon."
+      },
+      "grossPrice": 98.0,
+      "purchasePrice": 41.0,
+      "stock": 280,
+      "weight": 0.78,
+      "width": 280.0,
+      "height": 120.0,
+      "length": 80.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "8c03f89bece14448fa675fb9d465976c",
+      "categories": [
+        "c1e5ea31c3301f2948993dad92e249cb",
+        "2d866d2f3fcdd51d5e3b12318a427769"
+      ],
+      "media": [
+        "a1dc5b24fc9ef6e754911de55810e372",
+        "8266ddb82b3ca42c2844194b8980044a",
+        "fbe9b46d918ad6074ffe26da56f93428"
+      ],
+      "properties": [
+        "bdec98d4cc5b90f8bd65be47c9e21262",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "1aa84ac7d6907602b60f87a4e32bb2b8",
+      "productNumber": "SW-DEMO-022",
+      "ean": "6971806349438",
+      "active": true,
+      "name": {
+        "zh-CN": "明前特级绿茶罐装",
+        "en-GB": "Premium Pre-Qingming Green Tea"
+      },
+      "description": {
+        "zh-CN": "明前头采嫩芽，手工摊晾与高温提香。汤色清亮、栗香持久，125g 密封罐装锁住鲜爽。",
+        "en-GB": "First-pick pre-Qingming buds, hand-withered and high-fired to fix the aroma. A bright, clear liquor with lasting chestnut fragrance, sealed in a 125 g tin."
+      },
+      "grossPrice": 68.0,
+      "purchasePrice": 27.0,
+      "stock": 190,
+      "weight": 0.18,
+      "width": 90.0,
+      "height": 110.0,
+      "length": 90.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "8c03f89bece14448fa675fb9d465976c",
+      "categories": [
+        "dbadeb1d1b670e0f5b7e4215efa65001",
+        "2d866d2f3fcdd51d5e3b12318a427769"
+      ],
+      "media": [
+        "23ea68ad0751649c71cf026a18c8034f",
+        "7924cc7d98017d678c7c18ac76fde110",
+        "beed570fe2b10122d3ef10441b0ff555"
+      ],
+      "properties": [
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "7df4db87c92ca43f795e53e71fe32de0",
+      "productNumber": "SW-DEMO-023",
+      "ean": "6920621272844",
+      "active": true,
+      "name": {
+        "zh-CN": "深山土蜂蜜",
+        "en-GB": "Wildflower Honey"
+      },
+      "description": {
+        "zh-CN": "秦岭深山百花蜜，一年仅取一次蜜。波美度 42 以上，浓稠挂勺，冲水泡茶都很搭。",
+        "en-GB": "Wildflower honey from the deep Qinling mountains, harvested just once a year. Above 42 Baume, thick enough to cling to the spoon — lovely in water or tea."
+      },
+      "grossPrice": 79.0,
+      "purchasePrice": 32.0,
+      "stock": 230,
+      "weight": 0.52,
+      "width": 85.0,
+      "height": 130.0,
+      "length": 85.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "8c03f89bece14448fa675fb9d465976c",
+      "categories": [
+        "c1e5ea31c3301f2948993dad92e249cb",
+        "2d866d2f3fcdd51d5e3b12318a427769"
+      ],
+      "media": [
+        "6af80da0d7badfcac043aab3a27eed3e",
+        "f5e8ab7b43ceb29f3c49b9aeb1325b98",
+        "fd7dab1436c560d481dd563024c0b92d"
+      ],
+      "properties": [
+        "bdec98d4cc5b90f8bd65be47c9e21262",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "9facee6cb433206e1513e9833815ca61",
+      "productNumber": "SW-DEMO-024",
+      "ean": "6965042357616",
+      "active": true,
+      "name": {
+        "zh-CN": "干红葡萄酒 750ml",
+        "en-GB": "Dry Red Wine 750ml"
+      },
+      "description": {
+        "zh-CN": "赤霞珠单酿，橡木桶陈酿 12 个月。酒体饱满，黑醋栗与烟熏气息平衡，佐餐佳选。",
+        "en-GB": "Single-varietal Cabernet Sauvignon aged 12 months in oak. A full body with balanced blackcurrant and smoky notes — an excellent dinner wine."
+      },
+      "grossPrice": 168.0,
+      "purchasePrice": 72.0,
+      "stock": 150,
+      "weight": 1.35,
+      "width": 85.0,
+      "height": 310.0,
+      "length": 85.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "0631f0809ce4015c91a6187c9a2b0305",
+      "categories": [
+        "c29d3f88caefff7674a44eaa29d64772",
+        "2d866d2f3fcdd51d5e3b12318a427769"
+      ],
+      "media": [
+        "36d3c6d05e4bd0d554f17974a23bffff",
+        "ccfe86696cb28810b0d521b1cb005628",
+        "c2a48942f78a9610cacc4549f4dc15d7"
+      ],
+      "properties": [
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "79d848786e21bc568583f6f44189ade1",
+      "productNumber": "SW-DEMO-025",
+      "ean": "6952178587073",
+      "active": true,
+      "name": {
+        "zh-CN": "玻尿酸保湿面霜",
+        "en-GB": "Hyaluronic Moisturising Cream"
+      },
+      "description": {
+        "zh-CN": "五重玻尿酸复配神经酰胺，锁水修护一步到位。质地清爽不黏腻，敏感肌可用，50g 大容量。",
+        "en-GB": "Five molecular weights of hyaluronic acid paired with ceramides to lock in moisture and support the skin barrier. A light, non-sticky texture suitable for sensitive skin, in a 50 g jar."
+      },
+      "grossPrice": 159.0,
+      "purchasePrice": 58.0,
+      "stock": 260,
+      "weight": 0.12,
+      "width": 75.0,
+      "height": 75.0,
+      "length": 75.0,
+      "shippingFree": false,
+      "markAsTopseller": true,
+      "manufacturerId": "6ddb66fdcf33b39733f7a8ab3916d687",
+      "categories": [
+        "fb71b373cccf2eab71e73496bab1e08e",
+        "2af8f2158c393b2a3a9e2017c4e1576a"
+      ],
+      "media": [
+        "cf79749b9fd79592880273eba44b4d4a",
+        "e2e6f8d1c1736818930a0ee5a136d245",
+        "2b81b286da52ce884d172fa3cceddfeb"
+      ],
+      "properties": [
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "367f3e2355f02ae5c76b18a8f25d911c",
+      "productNumber": "SW-DEMO-026",
+      "ean": "6957340674819",
+      "active": true,
+      "name": {
+        "zh-CN": "丝绒哑光口红",
+        "en-GB": "Velvet Matte Lipstick"
+      },
+      "description": {
+        "zh-CN": "丝绒雾面质地，显色饱和却不拔干。6 个日常色号可选，磁吸管身，补妆也有仪式感。",
+        "en-GB": "A velvet-matte texture with saturated colour that never feels dry. Six everyday shades in a magnetic case that makes touch-ups feel special."
+      },
+      "grossPrice": 129.0,
+      "purchasePrice": 44.0,
+      "stock": 310,
+      "weight": 0.04,
+      "width": 25.0,
+      "height": 90.0,
+      "length": 25.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "3e454a44e53f802221d3e294a059f8ab",
+      "categories": [
+        "ae37a5dcff1ab874549ff18fe256248e",
+        "2af8f2158c393b2a3a9e2017c4e1576a"
+      ],
+      "media": [
+        "79ac3d8eadb58c9d791890263c53a7e1",
+        "c23a260134ed38cd489df661c3f429a3",
+        "8a6ee17bed1a5589b77688e7ccdf26fc"
+      ],
+      "properties": [
+        "1ed5566cddafcae086f6c28c579f8210",
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "bb4abe3e92a692cea6af993ac1ebbf0c",
+      "productNumber": "SW-DEMO-027",
+      "ean": "6920504956002",
+      "active": true,
+      "name": {
+        "zh-CN": "木质调淡香水",
+        "en-GB": "Woody Eau de Toilette"
+      },
+      "description": {
+        "zh-CN": "前调佛手柑、中调雪松、尾调白麝香，清冷不甜腻。50ml 喷雾装，通勤面试都能喷。",
+        "en-GB": "Bergamot top, cedar heart and a white-musk base — cool and never sweet. A 50 ml spray that works at the office and in interviews."
+      },
+      "grossPrice": 299.0,
+      "purchasePrice": 105.0,
+      "stock": 130,
+      "weight": 0.28,
+      "width": 60.0,
+      "height": 130.0,
+      "length": 60.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "3e454a44e53f802221d3e294a059f8ab",
+      "categories": [
+        "97779c81125ce67f44f80044d02dc57d",
+        "2af8f2158c393b2a3a9e2017c4e1576a"
+      ],
+      "media": [
+        "7154cb255041d427ac35eea51de4793f",
+        "ff5abc2a2c7aeacc64da45ae3321eef6",
+        "7c59aec26eadeaa725e2995458146021"
+      ],
+      "properties": [
+        "c88d3d23f334c60c90ca2c5bdc3f48fe",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "674cadd5d92cb0c80091f61b32d40b40",
+      "productNumber": "SW-DEMO-028",
+      "ean": "6984705574820",
+      "active": true,
+      "name": {
+        "zh-CN": "补水保湿面膜",
+        "en-GB": "Hydrating Sheet Mask"
+      },
+      "description": {
+        "zh-CN": "天丝膜布服帖轻薄，精华液 25ml 满满当当。敷 15 分钟即洗水润透亮，一盒 10 片。",
+        "en-GB": "A thin, clingy Tencel sheet soaked with 25 ml of essence. Fifteen minutes leaves skin plumped and glowing; ten masks per box."
+      },
+      "grossPrice": 89.0,
+      "purchasePrice": 30.0,
+      "stock": 420,
+      "weight": 0.35,
+      "width": 150.0,
+      "height": 40.0,
+      "length": 120.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "6ddb66fdcf33b39733f7a8ab3916d687",
+      "categories": [
+        "fb71b373cccf2eab71e73496bab1e08e",
+        "2af8f2158c393b2a3a9e2017c4e1576a"
+      ],
+      "media": [
+        "4450233a25898b7b180291c1638a9023",
+        "63e8d0dfa1d8b66f092d45607240084c",
+        "da7650789f01dee39ba2852ae0177d07"
+      ],
+      "properties": [
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    },
+    {
+      "id": "47c59c9cfd7f9acb4875be3dd27e5780",
+      "productNumber": "SW-DEMO-029",
+      "ean": "6978891634425",
+      "active": true,
+      "name": {
+        "zh-CN": "氨基酸温和洗发水",
+        "en-GB": "Gentle Amino-Acid Shampoo"
+      },
+      "description": {
+        "zh-CN": "氨基酸表活体系，温和清洁不紧绷。添加薄荷与侧柏叶提取物，控油蓬松，500ml 大瓶装。",
+        "en-GB": "An amino-acid surfactant system that cleans without stripping. Mint and platycladus extracts help control oil and add body, in a 500 ml bottle."
+      },
+      "grossPrice": 59.0,
+      "purchasePrice": 21.0,
+      "stock": 360,
+      "weight": 0.55,
+      "width": 80.0,
+      "height": 220.0,
+      "length": 80.0,
+      "shippingFree": false,
+      "markAsTopseller": false,
+      "manufacturerId": "17a0566f7fe58033127c4d54ee79d0d0",
+      "categories": [
+        "a84fd04962a35c89446fb235307274af",
+        "2af8f2158c393b2a3a9e2017c4e1576a"
+      ],
+      "media": [
+        "dedfea931e90e9f5be0fb07d0d43e369",
+        "0cfeb0b6f8dd91de1b91d7940b2622c9",
+        "11759216885e5105c3060a414bb1168e"
+      ],
+      "properties": [
+        "8386aeae628c5b2ea43c31e26d9af805",
+        "1c8c1303b4421c81a7dd5f4e91e89e8e"
+      ]
+    },
+    {
+      "id": "a52f60941b51a4277bc12d9db6e35a14",
+      "productNumber": "SW-DEMO-030",
+      "ean": "6912652023221",
+      "active": true,
+      "name": {
+        "zh-CN": "烟酰胺焕亮精华液",
+        "en-GB": "Niacinamide Brightening Serum"
+      },
+      "description": {
+        "zh-CN": "5% 烟酰胺复配透明质酸，提亮肤色、淡化痘印。滴管设计取量精准，30ml 约可用两个月。",
+        "en-GB": "5% niacinamide with hyaluronic acid to even out skin tone and fade post-acne marks. A dropper for precise dosing; 30 ml lasts about two months."
+      },
+      "grossPrice": 219.0,
+      "purchasePrice": 76.0,
+      "stock": 240,
+      "weight": 0.09,
+      "width": 35.0,
+      "height": 100.0,
+      "length": 35.0,
+      "shippingFree": false,
+      "markAsTopseller": true,
+      "manufacturerId": "6ddb66fdcf33b39733f7a8ab3916d687",
+      "categories": [
+        "fb71b373cccf2eab71e73496bab1e08e",
+        "2af8f2158c393b2a3a9e2017c4e1576a"
+      ],
+      "media": [
+        "36fd7e97e5b3b82a24cd2132cc4e4166",
+        "24bf5b599a9482612428e6562924daed",
+        "b35e3a86e881b064cf6a13a06fff070d"
+      ],
+      "properties": [
+        "ca11b1694afcb4157c830882a74ea817"
+      ]
+    }
+  ]
+}

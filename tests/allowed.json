@@ -1,0 +1,57 @@
+[
+    {
+      "location": "Shopwell\\Core\\TestBootstrapper::bootstrap",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::generatePhysicalFilename()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 12
+    },
+    {
+      "location": "Shopwell\\Core\\TestBootstrapper::bootstrap",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::generateMd5Path()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 12
+    },
+    {
+      "location": "Shopwell\\Core\\TestBootstrapper::bootstrap",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::generatePathCacheBuster()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 12
+    },
+    {
+      "location": "Shopwell\\Core\\TestBootstrapper::bootstrap",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::getAbsoluteMediaUrl()\" is deprecated and will be removed in v6.6.0.0. Use \"Use AbstractUrlGenerator instead\" instead.",
+      "count": 12
+    },
+    {
+      "location": "Shopwell\\Core\\TestBootstrapper::bootstrap",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::getRelativeMediaUrl()\" is deprecated and will be removed in v6.6.0.0. Use \"Use AbstractUrlGenerator instead\" instead.",
+      "count": 12
+    },
+    {
+      "location": "Swag\\PlatformDemoDataTests\\DemoDataServiceTest::testGenerate",
+      "message":  "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Message\\GenerateThumbnailsMessage::Shopwell\\Core\\Content\\Media\\Message\\GenerateThumbnailsMessage::withContext()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 9
+    },
+    {
+      "location": "Swag\\PlatformDemoDataTests\\DemoDataServiceTest::testGenerate",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::getRelativeMediaUrl()\" is deprecated and will be removed in v6.6.0.0. Use \"Use AbstractUrlGenerator instead\" instead.",
+      "count": 18
+    },
+    {
+      "location": "Swag\\PlatformDemoDataTests\\DemoDataServiceTest::testGenerate",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::generateMd5Path()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 18
+    },
+    {
+      "location": "Swag\\PlatformDemoDataTests\\DemoDataServiceTest::testGenerate",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::generatePathCacheBuster()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 18
+    },
+    {
+      "location": "Swag\\PlatformDemoDataTests\\DemoDataServiceTest::testGenerate",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::Shopwell\\Core\\Content\\Media\\Pathname\\PathnameStrategy\\AbstractPathNameStrategy::generatePhysicalFilename()\" is deprecated and will be removed in v6.6.0.0.",
+      "count": 18
+    },
+    {
+      "location": "Swag\\PlatformDemoDataTests\\DemoDataServiceTest::testGenerate",
+      "message": "Since shopwell/core : Method \"Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::Shopwell\\Core\\Content\\Media\\Pathname\\UrlGenerator::getAbsoluteMediaUrl()\" is deprecated and will be removed in v6.6.0.0. Use \"Use AbstractUrlGenerator instead\" instead.",
+      "count": 18
+    }
+]

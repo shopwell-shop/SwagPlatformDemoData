@@ -1,0 +1,81 @@
+{
+  "manufacturers": [
+    {
+      "id": "a2d6344ace798db4bc1fc876deb7260c",
+      "name": {
+        "zh-CN": "简衣服饰",
+        "en-GB": "SimpleWear Apparel"
+      }
+    },
+    {
+      "id": "059428b0fb0375eff3132879bf1f6197",
+      "name": {
+        "zh-CN": "北岸牛仔",
+        "en-GB": "Northshore Denim"
+      }
+    },
+    {
+      "id": "9337b8bc50878f347e14d8add5b8b650",
+      "name": {
+        "zh-CN": "云杉数码",
+        "en-GB": "Spruce Digital"
+      }
+    },
+    {
+      "id": "edcca18492f1f520e088c79fd04859f4",
+      "name": {
+        "zh-CN": "极客工坊",
+        "en-GB": "GeekWorks Studio"
+      }
+    },
+    {
+      "id": "c0a6b3d03459a540808b74af2fa3d7c7",
+      "name": {
+        "zh-CN": "木白家居",
+        "en-GB": "Mubai Home"
+      }
+    },
+    {
+      "id": "a333508b78c816cd3d385c9a9ffd2fe9",
+      "name": {
+        "zh-CN": "森野餐厨",
+        "en-GB": "Senye Kitchen"
+      }
+    },
+    {
+      "id": "8c03f89bece14448fa675fb9d465976c",
+      "name": {
+        "zh-CN": "山野食集",
+        "en-GB": "Shanye Pantry"
+      }
+    },
+    {
+      "id": "0631f0809ce4015c91a6187c9a2b0305",
+      "name": {
+        "zh-CN": "溯源酒业",
+        "en-GB": "Suyuan Cellars"
+      }
+    },
+    {
+      "id": "6ddb66fdcf33b39733f7a8ab3916d687",
+      "name": {
+        "zh-CN": "澄肌护肤",
+        "en-GB": "Chengji Skincare"
+      }
+    },
+    {
+      "id": "3e454a44e53f802221d3e294a059f8ab",
+      "name": {
+        "zh-CN": "花时美妆",
+        "en-GB": "Huashi Beauty"
+      }
+    },
+    {
+      "id": "17a0566f7fe58033127c4d54ee79d0d0",
+      "name": {
+        "zh-CN": "清漾洗护",
+        "en-GB": "Qingyang Care"
+      }
+    }
+  ]
+}

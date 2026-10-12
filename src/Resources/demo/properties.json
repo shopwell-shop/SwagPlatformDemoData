@@ -1,0 +1,275 @@
+{
+  "propertyGroups": [
+    {
+      "id": "797aef52159df80e181a1607fe1d193f",
+      "name": {
+        "zh-CN": "颜色",
+        "en-GB": "Colour"
+      },
+      "displayType": "color",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "bb6befecc1354152ea31879430e45042",
+          "name": {
+            "zh-CN": "黑色",
+            "en-GB": "Black"
+          },
+          "colorHexCode": "#000000ff"
+        },
+        {
+          "id": "3c39ce826a9811ed3e03b37a871db33f",
+          "name": {
+            "zh-CN": "白色",
+            "en-GB": "White"
+          },
+          "colorHexCode": "#ffffffff"
+        },
+        {
+          "id": "1ed5566cddafcae086f6c28c579f8210",
+          "name": {
+            "zh-CN": "红色",
+            "en-GB": "Red"
+          },
+          "colorHexCode": "#e53935ff"
+        },
+        {
+          "id": "19ff65bda05bd9921aeb2b02814a2109",
+          "name": {
+            "zh-CN": "蓝色",
+            "en-GB": "Blue"
+          },
+          "colorHexCode": "#1e88e5ff"
+        },
+        {
+          "id": "7471f6ec8e85e3f142f50797611172e2",
+          "name": {
+            "zh-CN": "绿色",
+            "en-GB": "Green"
+          },
+          "colorHexCode": "#43a047ff"
+        }
+      ]
+    },
+    {
+      "id": "cf4bbbfde3ff5c4ecbd1de0a2e247268",
+      "name": {
+        "zh-CN": "尺码",
+        "en-GB": "Size"
+      },
+      "displayType": "text",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "bf123d949247842d41d6ae81c5aaeb12",
+          "name": {
+            "zh-CN": "S",
+            "en-GB": "S"
+          }
+        },
+        {
+          "id": "a79d505447231fdc5e9b19899478f057",
+          "name": {
+            "zh-CN": "M",
+            "en-GB": "M"
+          }
+        },
+        {
+          "id": "4cdc3fa4dea83da5edbbc4ca888999cd",
+          "name": {
+            "zh-CN": "L",
+            "en-GB": "L"
+          }
+        },
+        {
+          "id": "d8e59f0c6b16a4000f2fb07118ac146d",
+          "name": {
+            "zh-CN": "XL",
+            "en-GB": "XL"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b4b38ee17003cb5ef00fcc303a155e6e",
+      "name": {
+        "zh-CN": "鞋码",
+        "en-GB": "Shoe size"
+      },
+      "displayType": "text",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "dbc0ebe9758bb4a1080fef22b42a164d",
+          "name": {
+            "zh-CN": "39",
+            "en-GB": "39"
+          }
+        },
+        {
+          "id": "e8819557e3c1bee0b60bbc2771e56dc3",
+          "name": {
+            "zh-CN": "40",
+            "en-GB": "40"
+          }
+        },
+        {
+          "id": "204bd47714572e84a72a4d002889429b",
+          "name": {
+            "zh-CN": "41",
+            "en-GB": "41"
+          }
+        },
+        {
+          "id": "6bdc2fbd0d9ca7515a3630ff8be5ab8f",
+          "name": {
+            "zh-CN": "42",
+            "en-GB": "42"
+          }
+        },
+        {
+          "id": "eb550c1def5373bcff351739dd831db8",
+          "name": {
+            "zh-CN": "43",
+            "en-GB": "43"
+          }
+        }
+      ]
+    },
+    {
+      "id": "e71931425fae519c08f5d056ef0b413f",
+      "name": {
+        "zh-CN": "材质",
+        "en-GB": "Material"
+      },
+      "displayType": "text",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "12d312143e5ed38dd45afd0a7d6a9881",
+          "name": {
+            "zh-CN": "纯棉",
+            "en-GB": "Cotton"
+          }
+        },
+        {
+          "id": "adc3436ecc216988ee456ecd1cd6e1d6",
+          "name": {
+            "zh-CN": "涤纶",
+            "en-GB": "Polyester"
+          }
+        },
+        {
+          "id": "e801a5320b9df2595c538f07753fc122",
+          "name": {
+            "zh-CN": "不锈钢",
+            "en-GB": "Stainless steel"
+          }
+        },
+        {
+          "id": "eae040d1d6ba41d4fdf46950bae505f3",
+          "name": {
+            "zh-CN": "陶瓷",
+            "en-GB": "Ceramic"
+          }
+        },
+        {
+          "id": "4cd9051f648f6bb347f6dea7588bf385",
+          "name": {
+            "zh-CN": "亚麻",
+            "en-GB": "Linen"
+          }
+        }
+      ]
+    },
+    {
+      "id": "a83b36d7eac29915c3042e58f3670e65",
+      "name": {
+        "zh-CN": "适用人群",
+        "en-GB": "Target group"
+      },
+      "displayType": "text",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "b9b8bc1742a02d4a0bea3dd5a78bbd86",
+          "name": {
+            "zh-CN": "男士",
+            "en-GB": "Men"
+          }
+        },
+        {
+          "id": "ca11b1694afcb4157c830882a74ea817",
+          "name": {
+            "zh-CN": "女士",
+            "en-GB": "Women"
+          }
+        },
+        {
+          "id": "1c8c1303b4421c81a7dd5f4e91e89e8e",
+          "name": {
+            "zh-CN": "通用",
+            "en-GB": "Unisex"
+          }
+        }
+      ]
+    },
+    {
+      "id": "b86564097864bf72cd7808835f1a7960",
+      "name": {
+        "zh-CN": "容量",
+        "en-GB": "Capacity"
+      },
+      "displayType": "text",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "dfc884656cc9aedced9dbc89681d3e77",
+          "name": {
+            "zh-CN": "350ml",
+            "en-GB": "350ml"
+          }
+        },
+        {
+          "id": "8386aeae628c5b2ea43c31e26d9af805",
+          "name": {
+            "zh-CN": "500ml",
+            "en-GB": "500ml"
+          }
+        },
+        {
+          "id": "1f9dfcd67c1d49944b6a93222a6d7380",
+          "name": {
+            "zh-CN": "750ml",
+            "en-GB": "750ml"
+          }
+        }
+      ]
+    },
+    {
+      "id": "16dfdc747da0f9b348e9d6e97792addc",
+      "name": {
+        "zh-CN": "包装",
+        "en-GB": "Package"
+      },
+      "displayType": "text",
+      "sortingType": "alphanumeric",
+      "options": [
+        {
+          "id": "c88d3d23f334c60c90ca2c5bdc3f48fe",
+          "name": {
+            "zh-CN": "礼盒装",
+            "en-GB": "Gift box"
+          }
+        },
+        {
+          "id": "bdec98d4cc5b90f8bd65be47c9e21262",
+          "name": {
+            "zh-CN": "简装",
+            "en-GB": "Simple pack"
+          }
+        }
+      ]
+    }
+  ]
+}
