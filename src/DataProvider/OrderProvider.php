@@ -19,6 +19,7 @@ use Shopwell\Core\Framework\Uuid\Uuid;
 use Psr\Clock\ClockInterface;
 use Symfony\Component\Clock\NativeClock;
 use Shopwell\Core\Framework\Util\Hasher;
+use Swag\PlatformDemoData\Helper\DemoDateHelper;
 
 /**
  * Creates demo orders for the demo customers and products, including line
@@ -30,7 +31,7 @@ class OrderProvider extends DemoDataProvider
 {
     public const SHIPPING_COSTS = 8.0;
 
-    private const ORDER_NUMBER_PREFIX = 'SW-DEMO-ORD-';
+    public const ORDER_NUMBER_PREFIX = 'SW-DEMO-ORD-';
 
     private const ORDER_COUNT = 30;
 
@@ -104,6 +105,9 @@ class OrderProvider extends DemoDataProvider
             // A re-import has to keep the states of orders that already exist.
             $isUpdate = isset($existingOrderIds[$orderId]);
             $customer = CustomerProvider::getDemoCustomer($customerIds[$index % \count($customerIds)]);
+            // Every demo timestamp sits inside the last month, with the current
+            // day carrying a bigger share than the other days.
+            $orderDateTime = DemoDateHelper::at($this->clock, 'order', $index);
 
             // one to three items per order, deterministic and distinct
             $itemCount = 1 + ($index % 3);
@@ -151,7 +155,7 @@ class OrderProvider extends DemoDataProvider
                 'languageId' => Defaults::LANGUAGE_SYSTEM,
                 'currencyId' => Defaults::CURRENCY,
                 'currencyFactor' => 1.0,
-                'orderDateTime' => $this->clock->now()->modify('-' . ($index * 2) . ' days'),
+                'orderDateTime' => $orderDateTime,
                 'stateId' => $orderState,
                 'billingAddressId' => $orderAddressId,
                 'itemRounding' => self::rounding(),
@@ -193,8 +197,8 @@ class OrderProvider extends DemoDataProvider
                     'shippingMethodId' => $shippingMethodId,
                     'stateId' => $deliveryState,
                     'shippingCosts' => $shippingCosts,
-                    'shippingDateEarliest' => $this->clock->now()->modify('+' . (2 + $index % 3) . ' days'),
-                    'shippingDateLatest' => $this->clock->now()->modify('+' . (5 + $index % 4) . ' days'),
+                    'shippingDateEarliest' => $orderDateTime->modify('+' . (2 + $index % 3) . ' days'),
+                    'shippingDateLatest' => $orderDateTime->modify('+' . (5 + $index % 4) . ' days'),
                     'trackingCodes' => [],
                 ]],
                 'transactions' => [[

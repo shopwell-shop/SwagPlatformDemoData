@@ -8,17 +8,24 @@ use Shopwell\Core\Content\Media\File\FileSaver;
 use Shopwell\Core\Framework\Api\Controller\SyncController;
 use Swag\PlatformDemoData\DataProvider\CategoryProvider;
 use Swag\PlatformDemoData\DataProvider\CmsPageProvider;
+use Swag\PlatformDemoData\DataProvider\CustomerLoyaltyProvider;
+use Swag\PlatformDemoData\DataProvider\CustomerPointTransactionProvider;
 use Swag\PlatformDemoData\DataProvider\CustomerProvider;
+use Swag\PlatformDemoData\DataProvider\CustomerWalletProvider;
+use Swag\PlatformDemoData\DataProvider\CustomerWalletTransactionProvider;
+use Swag\PlatformDemoData\DataProvider\LoyaltyTierProvider;
 use Swag\PlatformDemoData\DataProvider\ManufacturerProvider;
+use Swag\PlatformDemoData\DataProvider\MediaProvider;
 use Swag\PlatformDemoData\DataProvider\OrderProvider;
+use Swag\PlatformDemoData\DataProvider\PaymentOrderProvider;
+use Swag\PlatformDemoData\DataProvider\PaymentRefundProvider;
+use Swag\PlatformDemoData\DataProvider\ProductProvider;
 use Swag\PlatformDemoData\DataProvider\ProductStreamProvider;
 use Swag\PlatformDemoData\DataProvider\PromotionProvider;
-use Swag\PlatformDemoData\DataProvider\TagProvider;
-use Swag\PlatformDemoData\DataProvider\MediaProvider;
-use Swag\PlatformDemoData\DataProvider\ProductProvider;
 use Swag\PlatformDemoData\DataProvider\PropertyProvider;
 use Swag\PlatformDemoData\DataProvider\RuleProvider;
 use Swag\PlatformDemoData\DataProvider\ShippingMethodProvider;
+use Swag\PlatformDemoData\DataProvider\TagProvider;
 use Swag\PlatformDemoData\DataProvider\TaxProvider;
 use Swag\PlatformDemoData\DemoDataService;
 
@@ -108,4 +115,57 @@ return static function (ContainerConfigurator $container): void {
             service(ClockInterface::class),
         ])
         ->tag('swag.demo_data.data_provider', ['priority' => 300]);
+
+    // The membership tiers are the basis of the loyalty program and are
+    // referenced by the customer assignments below.
+    $services->set(LoyaltyTierProvider::class)
+        ->args([service(Connection::class)])
+        ->tag('swag.demo_data.data_provider', ['priority' => 850]);
+
+    $services->set(CustomerLoyaltyProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 280]);
+
+    // The wallet has to exist before the transactions that are booked on it.
+    $services->set(CustomerWalletProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 275]);
+
+    $services->set(CustomerPointTransactionProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 260]);
+
+    $services->set(CustomerWalletTransactionProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+            service(CustomerWalletProvider::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 255]);
+
+    // The payment order references the demo orders and the seeded payment app,
+    // the refunds reference the payment order, so they come last.
+    $services->set(PaymentOrderProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 250]);
+
+    $services->set(PaymentRefundProvider::class)
+        ->args([
+            service(Connection::class),
+            service(ClockInterface::class),
+            service(PaymentOrderProvider::class),
+        ])
+        ->tag('swag.demo_data.data_provider', ['priority' => 240]);
 };

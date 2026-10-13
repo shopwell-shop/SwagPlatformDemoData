@@ -45,12 +45,34 @@ class DemoDataServiceTest extends TestCase
     private const TAG_COUNT = 20;
     private const PRODUCT_STREAM_COUNT = 30;
     private const PROMOTION_COUNT = 5;
+    private const LOYALTY_TIER_COUNT = 4;
+    private const POINT_TRANSACTION_COUNT = 20;
+    private const WALLET_COUNT = 10;
+    private const WALLET_TRANSACTION_COUNT = 20;
+    private const PAYMENT_ORDER_COUNT = 30;
+    private const PAYMENT_REFUND_COUNT = 30;
+
+    /**
+     * Nothing the demo data writes may be dated further back than this.
+     */
+    private const OLDEST_ALLOWED_DAYS = 32;
 
     private const IMAGES_PER_PRODUCT = 3;
 
     protected function setUp(): void
     {
         $connection = $this->getContainer()->get(Connection::class);
+
+        // The ledgers reference the orders, so they have to go first. The
+        // payments and their refunds are removed through the tables, because
+        // the DAL refuses to delete a payment order that carries history.
+        $connection->executeStatement('DELETE FROM `payment_refund`');
+        $connection->executeStatement('DELETE FROM `payment_order`');
+        $connection->executeStatement('DELETE FROM `customer_point_transaction`');
+        $connection->executeStatement('DELETE FROM `customer_wallet_transaction`');
+        $connection->executeStatement('DELETE FROM `customer_loyalty`');
+        $connection->executeStatement('DELETE FROM `customer_wallet`');
+        $connection->executeStatement('DELETE FROM `loyalty_tier`');
 
         $connection->executeStatement('DELETE FROM `order`');
         $connection->executeStatement('DELETE FROM product');
@@ -85,6 +107,13 @@ class DemoDataServiceTest extends TestCase
         $this->assertEntityCountGreaterThanOrEqual(self::TAG_COUNT, 'tag.repository');
         $this->assertEntityCountGreaterThanOrEqual(self::PRODUCT_STREAM_COUNT, 'product_stream.repository');
         $this->assertEntityCountGreaterThanOrEqual(self::PROMOTION_COUNT, 'promotion.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::LOYALTY_TIER_COUNT, 'loyalty_tier.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::CUSTOMER_COUNT, 'customer_loyalty.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::POINT_TRANSACTION_COUNT, 'customer_point_transaction.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::WALLET_COUNT, 'customer_wallet.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::WALLET_TRANSACTION_COUNT, 'customer_wallet_transaction.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::PAYMENT_ORDER_COUNT, 'payment_order.repository');
+        $this->assertEntityCountGreaterThanOrEqual(self::PAYMENT_REFUND_COUNT, 'payment_refund.repository');
     }
 
     public function testEveryProductHasBetweenOneAndThreeVariants(): void
@@ -340,6 +369,159 @@ class DemoDataServiceTest extends TestCase
         static::assertTrue(\password_verify('shopwell123', $hash));
     }
 
+    public function testGenerateCreatesLoyaltyProgramWithMatchingBalances(): void
+    {
+        $connection = $this->getContainer()->get(Connection::class);
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        // the four tiers exist and every one of them is in use
+        static::assertSame(self::LOYALTY_TIER_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `loyalty_tier`'));
+        static::assertSame(self::LOYALTY_TIER_COUNT, (int) $connection->fetchOne('SELECT COUNT(DISTINCT `membership_tier_id`) FROM `customer_loyalty`'));
+
+        // every demo customer owns a membership
+        static::assertSame(self::CUSTOMER_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_loyalty`'));
+
+        // the ledger is complete and all four booking types are used
+        static::assertSame(self::POINT_TRANSACTION_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_point_transaction`'));
+        static::assertSame(
+            ['adjust', 'award', 'expire', 'redeem'],
+            \array_keys($connection->fetchAllKeyValue('SELECT `type`, COUNT(*) FROM `customer_point_transaction` GROUP BY `type` ORDER BY `type`')),
+        );
+
+        // the balance of a membership is the sum of the bookings of its customer
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `customer_loyalty` cl
+            WHERE EXISTS (SELECT 1 FROM `customer_point_transaction` t WHERE t.customer_id = cl.customer_id)
+              AND cl.points_balance <> (
+                  SELECT COALESCE(SUM(t.points), 0) FROM `customer_point_transaction` t WHERE t.customer_id = cl.customer_id
+              )
+        '));
+
+        // every balance_after is the balance that customer had at that moment,
+        // so the rows are chronological as well
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `customer_point_transaction` t
+            WHERE t.balance_after <> (
+                SELECT COALESCE(SUM(p.points), 0) FROM `customer_point_transaction` p
+                WHERE p.customer_id = t.customer_id
+                  AND (p.created_at < t.created_at OR (p.created_at = t.created_at AND p.id <= t.id))
+            )
+        '));
+    }
+
+    public function testGenerateCreatesWalletHistory(): void
+    {
+        $connection = $this->getContainer()->get(Connection::class);
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        static::assertSame(self::WALLET_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_wallet`'));
+        static::assertSame(self::WALLET_TRANSACTION_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_wallet_transaction`'));
+
+        // every wallet has a history and its balance is the sum of it
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `customer_wallet` w
+            WHERE NOT EXISTS (SELECT 1 FROM `customer_wallet_transaction` t WHERE t.customer_wallet_id = w.id)
+               OR w.balance <> (
+                   SELECT COALESCE(SUM(t.amount), 0) FROM `customer_wallet_transaction` t WHERE t.customer_wallet_id = w.id
+               )
+        '));
+
+        // every balance_after is the balance that wallet had at that moment
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `customer_wallet_transaction` t
+            WHERE t.balance_after <> (
+                SELECT COALESCE(SUM(p.amount), 0) FROM `customer_wallet_transaction` p
+                WHERE p.customer_wallet_id = t.customer_wallet_id
+                  AND (p.created_at < t.created_at OR (p.created_at = t.created_at AND p.id <= t.id))
+            )
+        '));
+    }
+
+    public function testGenerateCreatesPaymentsAndRefunds(): void
+    {
+        $connection = $this->getContainer()->get(Connection::class);
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        static::assertSame(self::PAYMENT_ORDER_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `payment_order`'));
+        static::assertSame(self::PAYMENT_REFUND_COUNT, (int) $connection->fetchOne('SELECT COUNT(*) FROM `payment_refund`'));
+
+        // every payment belongs to a demo order
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `payment_order` po
+            WHERE NOT EXISTS (SELECT 1 FROM `order` o WHERE o.order_number = po.out_trade_no)
+        '));
+
+        // the payments tell a story: plain, fully and partly refunded ones
+        $states = $connection->fetchAllKeyValue('
+            SELECT sms.technical_name, COUNT(*)
+            FROM `payment_order` po
+            INNER JOIN `state_machine_state` sms ON sms.id = po.state_id
+            GROUP BY sms.technical_name
+        ');
+        static::assertSame(5, (int) ($states['paid'] ?? 0));
+        static::assertSame(10, (int) ($states['refunded'] ?? 0));
+        static::assertSame(15, (int) ($states['refunded_partially'] ?? 0));
+
+        // the refunded amount of a payment is exactly the sum of its refunds
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `payment_order` po
+            WHERE po.refunded_amount <> (
+                SELECT COALESCE(SUM(r.amount), 0) FROM `payment_refund` r WHERE r.payment_order_id = po.id
+            )
+        '));
+
+        // a payment without refunds is never in a refunded state
+        static::assertSame(0, (int) $connection->fetchOne('
+            SELECT COUNT(*) FROM `payment_order` po
+            INNER JOIN `state_machine_state` sms ON sms.id = po.state_id
+            WHERE sms.technical_name = \'paid\' AND po.refunded_amount > 0
+        '));
+    }
+
+    public function testDemoDataCoversTodayAndYesterday(): void
+    {
+        $connection = $this->getContainer()->get(Connection::class);
+        $this->getContainer()->get(DemoDataService::class)->generate(new Context(new SystemSource()));
+
+        $timestamps = [
+            'order' => 'order_date_time',
+            'customer_loyalty' => 'created_at',
+            'customer_point_transaction' => 'created_at',
+            'customer_wallet_transaction' => 'created_at',
+            'payment_order' => 'created_at',
+            'payment_refund' => 'created_at',
+        ];
+
+        foreach ($timestamps as $table => $column) {
+            // the shop has to look alive on the day it was installed, so both
+            // the current day and the day before carry records
+            foreach (['today' => 0, 'yesterday' => 1] as $label => $daysAgo) {
+                static::assertGreaterThan(
+                    0,
+                    (int) $connection->fetchOne(\sprintf(
+                        'SELECT COUNT(*) FROM `%s` WHERE DATEDIFF(CURDATE(), DATE(`%s`)) = %d',
+                        $table,
+                        $column,
+                        $daysAgo,
+                    )),
+                    \sprintf('%s must contain at least one record of %s', $table, $label),
+                );
+            }
+
+            // and nothing is dated further back than the last month
+            static::assertSame(
+                0,
+                (int) $connection->fetchOne(\sprintf(
+                    'SELECT COUNT(*) FROM `%s` WHERE `%s` < DATE_SUB(NOW(), INTERVAL %d DAY)',
+                    $table,
+                    $column,
+                    self::OLDEST_ALLOWED_DAYS,
+                )),
+                \sprintf('%s must not contain records older than %d days', $table, self::OLDEST_ALLOWED_DAYS),
+            );
+        }
+    }
+
     public function testDeleteRemovesAllDemoData(): void
     {
         $demoDataService = $this->getContainer()->get(DemoDataService::class);
@@ -359,6 +541,19 @@ class DemoDataServiceTest extends TestCase
         static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `tag`'));
         static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `product_stream`'));
         static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `promotion`'));
+
+        // the loyalty program, the wallets and the payments are removed too
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `loyalty_tier`'));
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_loyalty`'));
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_point_transaction`'));
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_wallet`'));
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `customer_wallet_transaction`'));
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `payment_refund`'));
+
+        // The DAL refuses to remove a payment order that carries history and
+        // the delete sequence swallows that error, so the payment provider
+        // removes the rows from the tables directly.
+        static::assertSame(0, (int) $connection->fetchOne('SELECT COUNT(*) FROM `payment_order`'));
 
         // Manufacturers used to survive a deactivation because they were only
         // created implicitly as a nested association of the product.
